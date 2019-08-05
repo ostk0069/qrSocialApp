@@ -31,40 +31,44 @@ class MainActivity : AppCompatActivity() {
         showQRButton = findViewById(R.id.showQR)
 
         submitButton.setOnClickListener {
-            val iam: String = iamEditText.text.toString()
-            val githubID: String = githubEditText.text.toString()
-            val twitterID: String = twitterEditText.text.toString()
-            if (iam.isNotEmpty() && githubID.isNotEmpty()) {
-                createQRImage(iam, githubID, twitterID)
-            } else {
+            createQRImage()
+        }
+
+        showQRButton.setOnClickListener {
+            showQRImage()
+        }
+    }
+
+    private fun createQRImage() {
+        val iam: String = iamEditText.text.toString()
+        val githubID: String = githubEditText.text.toString()
+        val twitterID: String = twitterEditText.text.toString()
+        if (iam.isNotEmpty() && githubID.isNotEmpty()) {
+            val url = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
+            try {
+                val barcodeEncoder = BarcodeEncoder()
+                bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
+            } catch(error: Exception) {
+                throw Exception("failed to create QR")
+            }
+        } else {
 //                AlertDialog.Builder(this)
 ////                    .setTitle("QRコード生成には名前とGitHubIDが必要です")
 ////                    .setPositiveButton("OK"){ _, _ ->
 ////                    }.show()
 
-            }
         }
+    }
 
-        showQRButton.setOnClickListener {
-            if (bitmap != null) {
-                val qrCodeImage: ImageView = findViewById<View>(R.id.qr_image) as ImageView
-                qrCodeImage.setImageBitmap(bitmap)
-            } else {
+    private fun showQRImage() {
+        if (bitmap != null) {
+            val qrCodeImage: ImageView = findViewById<View>(R.id.qr_image) as ImageView
+            qrCodeImage.setImageBitmap(bitmap)
+        } else {
 //                AlertDialog.Builder(this)
 ////                    .setTitle("QRコードの生成を事前に行ってください")
 ////                    .setPositiveButton("OK"){ _, _ ->
 ////                    }.show()
-            }
-        }
-    }
-
-    private fun createQRImage(iam: String, githubID: String, twitterID: String) {
-        val url = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
-        try {
-            val barcodeEncoder = BarcodeEncoder()
-            bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
-        } catch(error: Exception) {
-            throw Exception("failed to create QR")
         }
     }
 }
