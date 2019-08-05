@@ -36,14 +36,19 @@ class MainActivity : AppCompatActivity() {
             val twitterID: String = twitterEditText.text.toString()
             if (iam.isNotEmpty() && githubID.isNotEmpty()) {
                 createQRImage(iam, githubID, twitterID)
+            } else {
+//                AlertDialog.Builder(this)
+////                    .setTitle("QRコード生成には名前とGitHubIDが必要です")
+////                    .setPositiveButton("OK"){ _, _ ->
+////                    }.show()
+
             }
-            // else: return popup warnings "You Should write your name & githubID"
         }
 
         showQRButton.setOnClickListener {
             if (bitmap != null) {
-//                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
-//                qrCodeImage.setImageBitmap(bitmap)
+                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
+                qrCodeImage.setImageBitmap(bitmap)
             } else {
 //                AlertDialog.Builder(this)
 ////                    .setTitle("QRコードの生成を事前に行ってください")
