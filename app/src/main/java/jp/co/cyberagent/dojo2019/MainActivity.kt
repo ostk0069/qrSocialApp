@@ -1,16 +1,13 @@
 package jp.co.cyberagent.dojo2019
 
 import android.graphics.Bitmap
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
