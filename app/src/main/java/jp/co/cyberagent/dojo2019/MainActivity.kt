@@ -1,6 +1,5 @@
 package jp.co.cyberagent.dojo2019
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,18 +13,22 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
-
     private var bitmap: Bitmap? = null
-    private val iamEditText = findViewById<EditText>(R.id.user_iam)
-    private val githubEditText = findViewById<EditText>(R.id.user_github)
-    private val twitterEditText = findViewById<EditText>(R.id.user_twitter)
-    private val submitButton = findViewById<Button>(R.id.user_submit)
-    private val showQRButton = findViewById<Button>(R.id.showQR)
+    private lateinit var iamEditText: EditText
+    private lateinit var githubEditText: EditText
+    private lateinit var twitterEditText: EditText
+    private lateinit var submitButton: Button
+    private lateinit var showQRButton: Button
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        iamEditText = findViewById(R.id.user_iam)
+        githubEditText = findViewById(R.id.user_github)
+        twitterEditText = findViewById(R.id.user_twitter)
+        submitButton = findViewById(R.id.user_submit)
+        showQRButton = findViewById(R.id.showQR)
 
         submitButton.setOnClickListener {
             val iam: String = iamEditText.text.toString()
@@ -39,17 +42,19 @@ class MainActivity : AppCompatActivity() {
 
         showQRButton.setOnClickListener {
             if (bitmap != null) {
-                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
-                qrCodeImage.setImageBitmap(bitmap)
+//                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
+//                qrCodeImage.setImageBitmap(bitmap)
+            } else {
+//                AlertDialog.Builder(this)
+////                    .setTitle("QRコードの生成を事前に行ってください")
+////                    .setPositiveButton("OK"){ _, _ ->
+////                    }.show()
             }
-            // else return popup warnings "You should make QR image"
-
         }
     }
 
     private fun createQRImage(iam: String, githubID: String, twitterID: String) {
         val url = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
-
         try {
             val barcodeEncoder = BarcodeEncoder()
             bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
@@ -57,5 +62,4 @@ class MainActivity : AppCompatActivity() {
             throw Exception("failed to create QR")
         }
     }
-
 }
