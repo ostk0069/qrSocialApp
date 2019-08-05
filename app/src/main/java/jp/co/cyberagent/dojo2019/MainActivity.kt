@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         showQRButton.setOnClickListener {
             if (bitmap != null) {
-                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
+                val qrCodeImage: ImageView = findViewById<View>(R.id.qr_image) as ImageView
                 qrCodeImage.setImageBitmap(bitmap)
             } else {
 //                AlertDialog.Builder(this)
