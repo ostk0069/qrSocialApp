@@ -1,23 +1,27 @@
 package jp.co.cyberagent.dojo2019
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
-    public var bitmap: Bitmap? = null
+
+    private var bitmap: Bitmap? = null
     private val iamEditText = findViewById<EditText>(R.id.user_iam)
     private val githubEditText = findViewById<EditText>(R.id.user_github)
     private val twitterEditText = findViewById<EditText>(R.id.user_twitter)
     private val submitButton = findViewById<Button>(R.id.user_submit)
     private val showQRButton = findViewById<Button>(R.id.showQR)
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         showQRButton.setOnClickListener {
             if (bitmap != null) {
-                // pop up modal to show the QR image
+                val qrCodeImage = findViewById<View>(R.id.qr_view) as ImageView
+                qrCodeImage.setImageBitmap(bitmap)
             }
             // else return popup warnings "You should make QR image"
 
