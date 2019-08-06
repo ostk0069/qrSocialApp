@@ -1,6 +1,5 @@
 package jp.co.cyberagent.dojo2019
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.room.Room
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -102,14 +100,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertUserData(){
-        var getData1 = captureURL.split("?")
-        var getData2 = getData1[1].split("&")
-        if (getData2.size < 3){
+    private fun insertUserData() {
+        var captureData = captureURL.split("?")
+        var splitedData = captureData[1].split("&")
+        if (splitedData.size < 3){
             Toast.makeText(this, "適切なIDを入力してください", Toast.LENGTH_LONG).show()
             return
         }
-        val user = User.create(getData2[0],getData2[1],getData2[2])
+        val user = User.create(splitedData[0],splitedData[1],splitedData[2])
         thread {
             database?.userDao()?.insert(user)
         }
