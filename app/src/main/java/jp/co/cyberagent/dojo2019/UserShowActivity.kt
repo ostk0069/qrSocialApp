@@ -1,7 +1,6 @@
 package jp.co.cyberagent.dojo2019
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -43,7 +42,10 @@ class UserShowActivity : AppCompatActivity() {
         var captureData = captureURL.split("?")
         var splitedData = captureData[1].split("&")
         if (splitedData.size < 3){
-            Toast.makeText(this, "適切なIDを入力してください", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                "保存に失敗しました。適切なIDが入力されたQRコーデではありませんでした。",
+                Toast.LENGTH_LONG).show()
             return
         }
         val user = User.create(splitedData[0],splitedData[1],splitedData[2])
@@ -51,8 +53,6 @@ class UserShowActivity : AppCompatActivity() {
         iamText.text = splitedData[0]
         githubText.text = splitedData[1]
         twitterText.text = splitedData[2]
-
-
     }
 
     private fun insertUserData(user: User) {
