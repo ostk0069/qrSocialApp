@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.room.Room
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
@@ -14,6 +15,7 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
 
     private var bitmap: Bitmap? = null
+    private var database: AppDatabase? = null
     private lateinit var iamEditText: EditText
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
@@ -23,6 +25,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        database = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "user"
+        ).build()
 
         iamEditText = findViewById(R.id.user_iam)
         githubEditText = findViewById(R.id.user_github)
