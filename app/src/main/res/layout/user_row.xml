@@ -24,13 +24,15 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginBottom="8sp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp">
         <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/github_image"
-                app:srcCompat="@drawable/github" android:layout_marginLeft="8sp"/>
+                app:srcCompat="@drawable/github"
+                android:layout_marginLeft="8sp" android:layout_gravity="center"/>
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
@@ -40,7 +42,14 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="8sp"
                 android:layout_marginRight="8sp"
-                android:layout_marginBottom="8sp"/>
+                android:layout_marginBottom="8sp"
+                android:layout_weight="1"/>
+        <Button
+                android:text="ブラウザで見る"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_marginRight="8sp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -52,7 +61,7 @@
                 android:src="@drawable/twitter"
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/twitter_image"
-                app:srcCompat="@drawable/twitter" android:layout_marginLeft="8sp"/>
+                app:srcCompat="@drawable/twitter" android:layout_marginLeft="8sp" android:layout_gravity="center"/>
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
@@ -62,6 +71,12 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="8sp"
                 android:layout_marginRight="8sp"
-                android:layout_marginBottom="8sp"/>
+                android:layout_marginBottom="8sp"
+                android:layout_weight="1"/>
+        <Button
+                android:text="アプリで見る"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2" android:layout_marginRight="8sp"/>
     </LinearLayout>
 </LinearLayout>
