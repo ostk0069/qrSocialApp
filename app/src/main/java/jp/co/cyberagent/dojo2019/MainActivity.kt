@@ -34,11 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        database = Room.databaseBuilder(
-//            applicationContext,
-//            AppDatabase::class.java, "user"
-//        ).build()
-
         val context = applicationContext
         database = AppDatabase.getDatabase(context)
 
@@ -81,11 +76,10 @@ class MainActivity : AppCompatActivity() {
                 throw Exception("failed to create QR")
             }
         } else {
-//                AlertDialog.Builder(this)
-////                    .setTitle("QRコード生成には名前とGitHubIDが必要です")
-////                    .setPositiveButton("OK"){ _, _ ->
-////                    }.show()
-
+            Toast.makeText(
+                this,
+                "QRコード生成には名前とGitHubIDが必要です",
+                Toast.LENGTH_LONG).show()
         }
     }
 
@@ -94,10 +88,10 @@ class MainActivity : AppCompatActivity() {
             val qrCodeImage: ImageView = findViewById<View>(R.id.qr_image) as ImageView
             qrCodeImage.setImageBitmap(bitmap)
         } else {
-//                AlertDialog.Builder(this)
-////                    .setTitle("QRコードの生成を事前に行ってください")
-////                    .setPositiveButton("OK"){ _, _ ->
-////                    }.show()
+            Toast.makeText(
+                this,
+                "QRコードの生成を事前に行ってください",
+                Toast.LENGTH_LONG).show()
         }
     }
 
@@ -112,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         var getData1 = captureURL.split("?")
         var getData2 = getData1[1].split("&")
         if (getData2.size < 3){
-            Toast.makeText(this, "ちゃんと形式に沿ったやつ読み込め", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "適切なIDを入力してください", Toast.LENGTH_LONG).show()
             return
         }
         val user = User.create(getData2[0],getData2[1],getData2[2])
