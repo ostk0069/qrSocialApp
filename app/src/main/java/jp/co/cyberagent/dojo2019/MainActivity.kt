@@ -102,12 +102,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertUserData() {
         var captureData = captureURL.split("?")
-        var splitedData = captureData[1].split("&")
-        if (splitedData.size < 3){
-            Toast.makeText(this, "適切なIDを入力してください", Toast.LENGTH_LONG).show()
-            return
-        }
-        val user = User.create(splitedData[0],splitedData[1],splitedData[2])
+        var splitData = captureData[1].split("&", "=")
+        val user = User.create(splitData[1],splitData[3],splitData[5])
         thread {
             database?.userDao()?.insert(user)
         }

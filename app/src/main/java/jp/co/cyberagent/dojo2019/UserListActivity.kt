@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -51,14 +52,18 @@ class UserListActivity : AppCompatActivity() {
             val layoutInflater = LayoutInflater.from(mContext)
             val userList = layoutInflater.inflate(R.layout.user_row, viewGroup, false)
 
+            val user = users.get(position)
             val userIAM = userList.findViewById<TextView>(R.id.user_iam)
-            userIAM.text = users.get(position).iam
+            userIAM.text = user.iam
             val userGithub = userList.findViewById<TextView>(R.id.user_github)
-            userGithub.text = users.get(position).githubID
+            userGithub.text = user.githubID
+            val githubImageView = userList.findViewById<ImageView>(R.id.github_image)
+            githubImageView.setImageResource(R.drawable.github)
             val userTwitter = userList.findViewById<TextView>(R.id.user_twitter)
-            userTwitter.text = users.get(position).twitterID
+            userTwitter.text = user.twitterID
+            val twitterImageView = userList.findViewById<ImageView>(R.id.twitter_image)
+            twitterImageView.setImageResource(R.drawable.twitter)
             return userList
-
         }
     }
 }

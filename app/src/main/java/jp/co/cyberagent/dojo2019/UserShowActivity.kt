@@ -40,25 +40,14 @@ class UserShowActivity : AppCompatActivity() {
 
     private fun createUserFromUri(data: String) {
         var captureData = captureURL.split("?")
-        var splitedData = captureData[1].split("&")
-        if (splitedData.size < 3){
-            Toast.makeText(
-                this,
-                "保存に失敗しました。適切なIDが入力されたQRコーデではありませんでした。",
-                Toast.LENGTH_LONG).show()
-            return
-        }
-        val user = User.create(splitedData[0],splitedData[1],splitedData[2])
-        insertUserData(user)
-        iamText.text = splitedData[0]
-        githubText.text = splitedData[1]
-        twitterText.text = splitedData[2]
-    }
-
-    private fun insertUserData(user: User) {
+        var splitData = captureData[1].split("&", "=")
+        val user = User.create(splitData[1], splitData[3], splitData[5])
         thread {
             database?.userDao()?.insert(user)
         }
+        iamText.text = splitData[1]
+        githubText.text = splitData[3]
+        twitterText.text = splitData[5]
     }
 
     private fun navigateUserList() {
