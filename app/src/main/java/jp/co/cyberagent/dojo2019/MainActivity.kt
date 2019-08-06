@@ -1,5 +1,7 @@
 package jp.co.cyberagent.dojo2019
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +13,7 @@ import androidx.room.Room
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,21 +24,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
     private lateinit var showQRButton: Button
+    private lateinit var userListButton: Button
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        database = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "user"
-        ).build()
+//        database = Room.databaseBuilder(
+//            applicationContext,
+//            AppDatabase::class.java, "user"
+//        ).build()
+
+        val context = applicationContext
+        database = AppDatabase.getDatabase(context)
 
         iamEditText = findViewById(R.id.user_iam)
         githubEditText = findViewById(R.id.user_github)
         twitterEditText = findViewById(R.id.user_twitter)
         submitButton = findViewById(R.id.user_submit)
         showQRButton = findViewById(R.id.showQR)
+        userListButton = findViewById(R.id.btn_user_list)
 
         submitButton.setOnClickListener {
             val iam: String = iamEditText.text.toString()
@@ -47,6 +55,11 @@ class MainActivity : AppCompatActivity() {
 
         showQRButton.setOnClickListener {
             showQRImage()
+        }
+
+        userListButton.setOnClickListener {
+            val intent = Intent(this, UserListActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -82,6 +95,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun createUser(iam: String, githubID: String, twitterID: String) {
         val user = User.create(iam, githubID, twitterID)
-        database?.userDao()?.insert(user)
+        thread {
+            database?.userDao()?.insert(user)
+        }
     }
 }
