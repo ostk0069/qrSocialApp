@@ -26,7 +26,7 @@ class UserListActivity : AppCompatActivity() {
         private val mContext: Context
         private var database: AppDatabase? = null
         private var users: List<User> = emptyList()
-        
+
         init {
             mContext = context
             database = AppDatabase.getDatabase(mContext)

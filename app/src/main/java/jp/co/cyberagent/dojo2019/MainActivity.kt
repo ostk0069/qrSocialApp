@@ -9,8 +9,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.room.Room
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
 import kotlin.concurrent.thread
@@ -19,12 +21,14 @@ class MainActivity : AppCompatActivity() {
 
     private var bitmap: Bitmap? = null
     private var database: AppDatabase? = null
+    private var captureURL = ""
     private lateinit var iamEditText: EditText
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
     private lateinit var showQRButton: Button
     private lateinit var userListButton: Button
+    private lateinit var cameraButton: Button
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         submitButton = findViewById(R.id.user_submit)
         showQRButton = findViewById(R.id.showQR)
         userListButton = findViewById(R.id.btn_user_list)
+        cameraButton = findViewById(R.id.btn_camera)
 
         submitButton.setOnClickListener {
             val iam: String = iamEditText.text.toString()
@@ -58,8 +63,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         userListButton.setOnClickListener {
-            val intent = Intent(this, UserListActivity::class.java)
-            startActivity(intent)
+            navigateUserList()
+        }
+
+        cameraButton.setOnClickListener {
+            IntentIntegrator(this).initiateScan()
         }
     }
 
@@ -97,6 +105,40 @@ class MainActivity : AppCompatActivity() {
         val user = User.create(iam, githubID, twitterID)
         thread {
             database?.userDao()?.insert(user)
+        }
+    }
+
+    private fun insertUserData(){
+        var getData1 = captureURL.split("?")
+        var getData2 = getData1[1].split("&")
+        if (getData2.size < 3){
+            Toast.makeText(this, "ちゃんと形式に沿ったやつ読み込め", Toast.LENGTH_LONG).show()
+            return
+        }
+        val user = User.create(getData2[0],getData2[1],getData2[2])
+        thread {
+            database?.userDao()?.insert(user)
+        }
+    }
+
+    private fun navigateUserList() {
+        val intent = Intent(this, UserListActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        var result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            } else {
+                captureURL = result.contents.toString()
+                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                insertUserData()
+                navigateUserList()
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
