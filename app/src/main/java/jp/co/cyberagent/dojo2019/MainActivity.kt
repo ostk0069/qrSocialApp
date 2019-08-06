@@ -38,7 +38,11 @@ class MainActivity : AppCompatActivity() {
         showQRButton = findViewById(R.id.showQR)
 
         submitButton.setOnClickListener {
-            createQRImage()
+            val iam: String = iamEditText.text.toString()
+            val githubID: String = githubEditText.text.toString()
+            val twitterID: String = twitterEditText.text.toString()
+            createUser(iam, githubID, twitterID)
+            createQRImage(iam, githubID, twitterID)
         }
 
         showQRButton.setOnClickListener {
@@ -46,10 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createQRImage() {
-        val iam: String = iamEditText.text.toString()
-        val githubID: String = githubEditText.text.toString()
-        val twitterID: String = twitterEditText.text.toString()
+    private fun createQRImage(iam: String, githubID: String, twitterID: String) {
         if (iam.isNotEmpty() && githubID.isNotEmpty()) {
             val url = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
             try {
@@ -77,5 +78,10 @@ class MainActivity : AppCompatActivity() {
 ////                    .setPositiveButton("OK"){ _, _ ->
 ////                    }.show()
         }
+    }
+
+    private fun createUser(iam: String, githubID: String, twitterID: String) {
+        val user = User.create(iam, githubID, twitterID)
+        database?.userDao()?.insert(user)
     }
 }

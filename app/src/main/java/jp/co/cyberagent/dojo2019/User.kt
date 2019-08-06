@@ -4,11 +4,22 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//data class User(val id: Int = -1, val iam: String, val tw: String, val gh: String)
-
 @Entity
-data class User(
-    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
-    @ColumnInfo(name = "iam") val iam: String?,
-    @ColumnInfo(name = "github_id") val githubID: String?
-)
+class User {
+
+    @PrimaryKey(autoGenerate = true) var uid: Int = 0
+    @ColumnInfo(name = "iam") var iam: String? = null
+    @ColumnInfo(name = "github_id") var githubID: String? = null
+    @ColumnInfo(name = "twitter_id") var twitterID: String? = null
+
+    companion object {
+        fun create(iam: String, githubID: String, twitterID: String?): User {
+            val user = User()
+            user.uid = 0
+            user.iam = iam
+            user.githubID = githubID
+            user.twitterID = twitterID
+            return user
+        }
+    }
+}
