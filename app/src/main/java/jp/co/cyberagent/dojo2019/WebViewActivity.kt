@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 class WebViewActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
+    private var githubID: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
+        githubID = intent?.getStringExtra("githubURL").toString()
+
         webView = findViewById(R.id.web_view)
-        webView.loadUrl("https://qiita.com/Galaxy/items/ca97c7873fb0eb0ba1d6")
+        webView.loadUrl("https://github.com/${githubID}")
     }
 }

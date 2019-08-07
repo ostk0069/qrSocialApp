@@ -25,9 +25,10 @@ class UserIndexAdapter(private val context: Context, private val userList: List<
         holder.twitterTextView.text = user.twitterID
 
         holder.githubButton.setOnClickListener {
-//            val intent = Intent(this, WebViewActivity::class.java)
-//            startActivity(intent)
+            val context = holder.itemView.context
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("githubURL", user.githubID)
+            context.startActivity(intent)
         }
-
     }
 }

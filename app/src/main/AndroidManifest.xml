@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".UserIndexActivity">
         </activity>
+        <activity android:name=".WebViewActivity">
+        </activity>
     </application>
 
 </manifest>
