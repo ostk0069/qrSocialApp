@@ -1,15 +1,14 @@
 package jp.co.cyberagent.dojo2019
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import kotlin.concurrent.thread
 
 class UserListActivity : AppCompatActivity() {
@@ -63,7 +62,17 @@ class UserListActivity : AppCompatActivity() {
             userTwitter.text = user.twitterID
             val twitterImageView = userList.findViewById<ImageView>(R.id.twitter_image)
             twitterImageView.setImageResource(R.drawable.twitter)
+
+            val githubButton = userList.findViewById<Button>(R.id.btn_github)
+            githubButton.setOnClickListener {
+                navigateWebView()
+            }
             return userList
+        }
+
+        private fun navigateWebView() {
+//            val intent = Intent(this, WebViewActivity::class.java)
+//            startActivity(intent)
         }
     }
 }
