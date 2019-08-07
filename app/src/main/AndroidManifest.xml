@@ -27,6 +27,8 @@
                 <data android:scheme="ca-tech" android:host="dojo" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserIndexActivity">
+        </activity>
     </application>
 
 </manifest>

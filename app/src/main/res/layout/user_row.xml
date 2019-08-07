@@ -32,7 +32,8 @@
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/github_image"
                 app:srcCompat="@drawable/github"
-                android:layout_marginLeft="8sp" android:layout_gravity="center"/>
+                android:layout_marginLeft="8sp"
+                android:layout_gravity="center"/>
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
