@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class UserIndexAdapter(private val context: Context, private val userList: List<User>) :
+class UserIndexAdapter(private val context: Context, private val userList: MutableList<User>) :
     RecyclerView.Adapter<UserIndexViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserIndexViewHolder {
@@ -30,5 +30,10 @@ class UserIndexAdapter(private val context: Context, private val userList: List<
             intent.putExtra("githubURL", user.githubID)
             context.startActivity(intent)
         }
+    }
+
+    fun updateUserList(users: MutableList<User>) {
+        userList.addAll(users)
+        notifyDataSetChanged()
     }
 }

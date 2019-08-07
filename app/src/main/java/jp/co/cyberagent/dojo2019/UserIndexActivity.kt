@@ -1,7 +1,14 @@
 package jp.co.cyberagent.dojo2019
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.Adapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.concurrent.thread
@@ -9,20 +16,89 @@ import kotlin.concurrent.thread
 class UserIndexActivity : AppCompatActivity() {
 
     private var database: AppDatabase? = null
-    private var userList: List<User> = emptyList()
+    private var userList = mutableListOf<User>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: UserIndexAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_index)
 
-        val context = applicationContext
-        database = AppDatabase.getDatabase(context)
+        database = AppDatabase.getDatabase(this)
+        recyclerView = findViewById(R.id.user_index)
+
+        recyclerView.setHasFixedSize(true)
+        adapter = UserIndexAdapter(this, userList)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(adapter)
+        swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
+
+//        Handler(Looper.getMainLooper()).post {
+//        }
+
         thread {
-            userList = database?.userDao()?.getAll().orEmpty()
-            findViewById<RecyclerView>(R.id.user_index).also { recyclerView: RecyclerView ->
-                recyclerView.adapter = UserIndexAdapter(this, userList)
-                recyclerView.layoutManager = LinearLayoutManager(this)
-            }
+            userList = database?.userDao()?.getAll()!!.toMutableList()
+            adapter.updateUserList(userList)
         }
     }
+
+
+    private fun getSwipeToDismissTouchHelper(adapter: RecyclerView.Adapter<UserIndexViewHolder>) =
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                thread {
+//                    database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
+                }
+                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                val itemView = viewHolder.itemView
+                val background = ColorDrawable()
+                background.color = Color.parseColor("#f44336")
+                if (dX < 0)
+                    background.setBounds(
+                        itemView.right + dX.toInt(),
+                        itemView.top,
+                        itemView.right,
+                        itemView.bottom
+                    )
+                else
+                    background.setBounds(
+                        itemView.left,
+                        itemView.top,
+                        itemView.left + dX.toInt(),
+                        itemView.bottom
+                    )
+                background.draw(c)
+            }
+        })
 }
