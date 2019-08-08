@@ -4,9 +4,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,9 +54,9 @@ class UserIndexActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                thread {
-//                    database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
-                }
+//                thread {
+////                    database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
+//                }
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
 
@@ -79,8 +76,7 @@ class UserIndexActivity : AppCompatActivity() {
                     dX,
                     dY,
                     actionState,
-                    isCurrentlyActive
-                )
+                    isCurrentlyActive)
                 val itemView = viewHolder.itemView
                 val background = ColorDrawable()
                 background.color = Color.parseColor("#f44336")

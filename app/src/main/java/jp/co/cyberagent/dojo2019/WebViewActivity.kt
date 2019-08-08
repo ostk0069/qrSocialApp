@@ -7,15 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 class WebViewActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private var githubID: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
-        githubID = intent?.getStringExtra("githubURL").toString()
-
+        val url = intent?.getStringExtra("url").toString()
         webView = findViewById(R.id.web_view)
-        webView.loadUrl("https://github.com/${githubID}")
+        webView.loadUrl(url)
     }
 }

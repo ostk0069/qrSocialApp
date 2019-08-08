@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class UserIndexAdapter(private val context: Context, private val userList: MutableList<User>) :
@@ -24,16 +23,32 @@ class UserIndexAdapter(private val context: Context, private val userList: Mutab
         holder.githubTextView.text = user.githubID
         holder.twitterTextView.text = user.twitterID
 
-        holder.githubButton.setOnClickListener {
+        holder.twitterButton.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra("githubURL", user.githubID)
-            context.startActivity(intent)
+            val twitterURL = "https://twitter.com/${user.twitterID}"
+            intent.putExtra("url", twitterURL)
+        }
+        val context = holder.itemView.context
+        holder.githubButton.setOnClickListener {
+            val githubURL = "https://github.com/${user.githubID}"
+            navigateWebView(context, githubURL)
+        }
+        holder.twitterButton.setOnClickListener {
+            val twitterURL = "https://twitter.com/${user.twitterID}"
+            navigateWebView(context, twitterURL)
         }
     }
 
     fun updateUserList(users: MutableList<User>) {
         userList.addAll(users)
         notifyDataSetChanged()
+    }
+
+    private fun navigateWebView(context: Context, url: String) {
+        val intent = Intent(context, WebViewActivity::class.java)
+        intent.putExtra("url", url)
+        context.startActivity(intent)
+
     }
 }

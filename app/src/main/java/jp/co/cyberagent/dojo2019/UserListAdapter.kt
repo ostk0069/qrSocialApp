@@ -53,16 +53,7 @@ class UserListAdapter(context: Context): BaseAdapter() {
         userTwitter.text = user.twitterID
         val twitterImageView = userList.findViewById<ImageView>(R.id.twitter_image)
         twitterImageView.setImageResource(R.drawable.twitter)
-
         val githubButton = userList.findViewById<Button>(R.id.btn_github)
-        githubButton.setOnClickListener {
-            navigateWebView()
-        }
         return userList
-    }
-
-    private fun navigateWebView() {
-//            val intent = Intent(mContext, WebViewActivity::class.java)
-//            startActivity(intent)
     }
 }
