@@ -112,8 +112,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateUserList() {
-//        val intent = Intent(this, UserListActivity::class.java)
-//        startActivity(intent)
         val intent = Intent(this, UserIndexActivity::class.java)
         startActivity(intent)
     }
