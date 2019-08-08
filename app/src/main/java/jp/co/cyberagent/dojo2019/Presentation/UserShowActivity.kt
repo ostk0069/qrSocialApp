@@ -2,11 +2,13 @@ package jp.co.cyberagent.dojo2019.Presentation
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Model.User
@@ -16,7 +18,6 @@ import kotlin.concurrent.thread
 
 class UserShowActivity : AppCompatActivity() {
 
-    private var captureURL: String = ""
     private var database: AppDatabase? = null
     private var user: User? = null
     private lateinit var iamText: TextView
@@ -41,13 +42,17 @@ class UserShowActivity : AppCompatActivity() {
         githubButton = findViewById(R.id.btn_github)
         twitterButton = findViewById(R.id.btn_twitter)
 
-        val dataUri = intent?.data
-        if (dataUri == null) {
-            captureURL = intent?.getStringExtra("url").toString()
+        var captureUri: Uri?
+        if (intent?.data == null) {
+            captureUri = intent?.getStringExtra("url")?.toUri()
         } else {
-            captureURL = dataUri.toString()
+            captureUri = intent?.data
         }
-        createUserFromUri()
+        createUserFromUri(captureUri)
+        iamText.text = user?.iam
+        githubText.text = user?.githubID
+        twitterText.text = user?.twitterID
+        showGithubImage()
 
         userListButton.setOnClickListener {
             navigateUserList()
@@ -64,24 +69,16 @@ class UserShowActivity : AppCompatActivity() {
         }
     }
 
-    private fun createUserFromUri() {
-        var captureData = captureURL.split("?")
-        var splitData = captureData[1].split("&", "=")
-        user = User.create(splitData[1], splitData[5], splitData[3])
+    private fun createUserFromUri(uri: Uri?) {
+        val uri: Uri = uri?: return
+        val iam: String = uri.getQueryParameter("iam").toString()
+        val githubID: String = uri.getQueryParameter("gh").toString()
+        val twitterID: String = uri.getQueryParameter("tw").toString()
+        user = User.create(iam, githubID, twitterID)
         val userData = user?: return
         thread {
             database?.userDao()?.insert(userData)
         }
-        iamText.text = user?.iam
-        githubText.text = user?.githubID
-        twitterText.text = user?.twitterID
-
-        val imagepath = "https://github.com/"+ splitData[5] +".png"
-        Picasso.get()
-            .load(imagepath)
-            .resize(300, 300)
-            .centerCrop()
-            .into(githubUserImage)
     }
 
     private fun navigateUserList() {
@@ -93,6 +90,13 @@ class UserShowActivity : AppCompatActivity() {
         val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra("url", url)
         context.startActivity(intent)
+    }
 
+    private fun showGithubImage() {
+        Picasso.get()
+            .load("https://github.com/"+ user?.githubID +".png")
+            .resize(300, 300)
+            .centerCrop()
+            .into(githubUserImage)
     }
 }
