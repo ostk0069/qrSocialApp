@@ -1,22 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-            android:text="TextView"
+    <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/user_github_image"
+            android:layout_marginLeft="16dp" android:layout_marginRight="16dp" android:layout_marginBottom="24dp"
+            android:layout_gravity="center" android:layout_marginTop="24dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/user_iam"/>
-    <TextView
-            android:text="TextView"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_iam"
+                android:text="Name"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginBottom="8sp"
+                android:layout_marginLeft="8sp"
+        />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/user_github"/>
-    <TextView
-            android:text="TextView"
+            android:layout_height="wrap_content">
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/github_image"
+                app:srcCompat="@drawable/github"
+                android:layout_marginLeft="8sp"
+                android:layout_gravity="center"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_github"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginBottom="8sp"
+                android:layout_weight="1"/>
+        <Button
+                android:text="ブラウザで見る"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_github"
+                android:layout_marginRight="8sp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/user_twitter"/>
+            android:layout_height="wrap_content">
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/twitter"
+                tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/twitter_image"
+                app:srcCompat="@drawable/twitter"
+                android:layout_marginLeft="8sp"
+                android:layout_gravity="center"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_twitter"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginBottom="8sp"
+                android:layout_weight="1"/>
+        <Button
+                android:text="アプリで見る"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_twitter"
+                android:layout_marginRight="8sp"/>
+    </LinearLayout>
     <Button
             android:text="Show User List"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/btn_user_list"/>
+            android:layout_height="wrap_content" android:id="@+id/btn_user_list" android:layout_marginTop="24sp"
+            android:layout_marginLeft="16sp" android:layout_marginRight="16sp"/>
 </LinearLayout>

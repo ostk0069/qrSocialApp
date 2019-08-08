@@ -116,16 +116,24 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun navigateUserShow(url: String) {
+        val intent = Intent(this, UserShowActivity::class.java)
+        intent.putExtra("url", url)
+        startActivity(intent)
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
-                captureURL = result.contents.toString()
+                captureURL = result.contents
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-                insertUserData()
-                navigateUserList()
+                navigateUserShow(captureURL)
+//                insertUserData()
+//                navigateUserList()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
