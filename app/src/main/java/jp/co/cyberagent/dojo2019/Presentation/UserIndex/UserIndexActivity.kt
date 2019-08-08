@@ -5,15 +5,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.*
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Model.User
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class UserIndexActivity : AppCompatActivity() {
 
@@ -36,14 +35,11 @@ class UserIndexActivity : AppCompatActivity() {
         val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(adapter)
         swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
 
-        runBlocking {
-            GlobalScope.launch {
-                userList = database?.userDao()?.getAll()!!.toMutableList()
-                adapter.updateUserList(userList)
-            }.join()
+        lifecycleScope.launch {
+            userList = database?.userDao()?.getAll()!!.toMutableList()
+            adapter.updateUserList(userList)
         }
     }
-
 
     private fun getSwipeToDismissTouchHelper(adapter: RecyclerView.Adapter<UserIndexViewHolder>) =
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -58,13 +54,12 @@ class UserIndexActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                runBlocking {
-                    GlobalScope.launch {
-                        database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
-                    }.join()
+                val position = viewHolder.adapterPosition
+                lifecycleScope.launch {
+                    database?.userDao()?.deleteByUid(userList[position].uid)
+                    userList.removeAt(position)
                 }
-                userList.removeAt(viewHolder.adapterPosition)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                adapter.notifyItemRemoved(position)
             }
 
             override fun onChildDraw(

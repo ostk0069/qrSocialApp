@@ -10,7 +10,7 @@ import jp.co.cyberagent.dojo2019.Model.User
 interface UserDao {
 
     @Query("SELECT * FROM user")
-    fun getAll(): List<User>
+    suspend fun getAll(): List<User>
 
     @Insert
     fun insert(user: User)
@@ -19,5 +19,5 @@ interface UserDao {
     fun delete(user: User)
 
     @Query("DELETE FROM user WHERE uid = :uid")
-    fun deleteByUid(uid: Int)
+    suspend fun deleteByUid(uid: Int)
 }
