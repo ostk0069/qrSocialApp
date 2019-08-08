@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Model.User
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.R
-import kotlin.concurrent.thread
+import kotlinx.coroutines.launch
 
 class UserShowActivity : AppCompatActivity() {
 
@@ -76,7 +77,7 @@ class UserShowActivity : AppCompatActivity() {
         val twitterID: String = uri.getQueryParameter("tw").toString()
         user = User.create(iam, githubID, twitterID)
         val userData = user?: return
-        thread {
+        lifecycleScope.launch {
             database?.userDao()?.insert(userData)
         }
     }
