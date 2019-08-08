@@ -95,13 +95,14 @@ class UserShowActivity : AppCompatActivity() {
     }
 
     private fun showGithubImage() {
-        if (user?.githubID.isNullOrBlank()) {
+        val githubID: String = user?.githubID.toString()
+        if (githubID.length < 4) {
             val drawable: Drawable? = getDrawable(R.drawable.failed)
             drawable?: return
             githubUserImage.setImageDrawable(drawable)
         } else {
             Picasso.get()
-                .load("https://github.com/"+ user?.githubID +".png")
+                .load("https://github.com/$githubID.png")
                 .resize(300, 300)
                 .centerCrop()
                 .into(githubUserImage)
