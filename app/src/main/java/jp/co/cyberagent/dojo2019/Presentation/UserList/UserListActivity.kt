@@ -1,8 +1,9 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation.UserList
 
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import jp.co.cyberagent.dojo2019.R
 
 class UserListActivity : AppCompatActivity() {
 

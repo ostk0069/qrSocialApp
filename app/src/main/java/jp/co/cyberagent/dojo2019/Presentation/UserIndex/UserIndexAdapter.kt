@@ -1,10 +1,13 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation.UserIndex
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import jp.co.cyberagent.dojo2019.R
+import jp.co.cyberagent.dojo2019.Model.User
+import jp.co.cyberagent.dojo2019.Presentation.WebViewActivity
 
 class UserIndexAdapter(private val context: Context, private val userList: MutableList<User>) :
     RecyclerView.Adapter<UserIndexViewHolder>() {

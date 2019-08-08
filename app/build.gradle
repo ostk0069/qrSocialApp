@@ -33,6 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
 
     def room_version = "2.2.0-alpha01"
     implementation "androidx.room:room-runtime:$room_version"

@@ -1,10 +1,14 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import jp.co.cyberagent.dojo2019.Database.AppDatabase
+import jp.co.cyberagent.dojo2019.Model.User
+import jp.co.cyberagent.dojo2019.Presentation.UserList.UserListActivity
+import jp.co.cyberagent.dojo2019.R
 import kotlin.concurrent.thread
 
 class UserShowActivity : AppCompatActivity() {

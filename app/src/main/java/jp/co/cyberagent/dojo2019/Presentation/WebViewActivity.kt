@@ -1,8 +1,9 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation
 
 import android.os.Bundle
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
+import jp.co.cyberagent.dojo2019.R
 
 class WebViewActivity : AppCompatActivity() {
 

@@ -1,9 +1,10 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation.UserIndex
 
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import jp.co.cyberagent.dojo2019.R
 
 class UserIndexViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

@@ -10,16 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Database.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserListActivity">
+        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.UserList.UserListActivity">
         </activity>
-        <activity android:name=".UserShowActivity">
+        <activity android:name=".Presentation.UserShowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -27,9 +27,9 @@
                 <data android:scheme="ca-tech" android:host="dojo" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserIndexActivity">
+        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity">
         </activity>
-        <activity android:name=".WebViewActivity">
+        <activity android:name=".Presentation.WebViewActivity">
         </activity>
     </application>
 

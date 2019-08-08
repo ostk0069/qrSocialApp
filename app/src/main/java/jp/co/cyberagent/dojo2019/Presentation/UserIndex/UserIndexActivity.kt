@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019
+package jp.co.cyberagent.dojo2019.Presentation.UserIndex
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -8,7 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.concurrent.thread
+import jp.co.cyberagent.dojo2019.*
+import jp.co.cyberagent.dojo2019.Database.AppDatabase
+import jp.co.cyberagent.dojo2019.Model.User
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class UserIndexActivity : AppCompatActivity() {
 
@@ -31,12 +36,11 @@ class UserIndexActivity : AppCompatActivity() {
         val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(adapter)
         swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
 
-//        Handler(Looper.getMainLooper()).post {
-//        }
-
-        thread {
-            userList = database?.userDao()?.getAll()!!.toMutableList()
-            adapter.updateUserList(userList)
+        runBlocking {
+            GlobalScope.launch {
+                userList = database?.userDao()?.getAll()!!.toMutableList()
+                adapter.updateUserList(userList)
+            }.join()
         }
     }
 
@@ -54,9 +58,12 @@ class UserIndexActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                thread {
-////                    database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
-//                }
+                runBlocking {
+                    GlobalScope.launch {
+                        database?.userDao()?.deleteByUid(userList[viewHolder.adapterPosition].uid)
+                    }.join()
+                }
+                userList.removeAt(viewHolder.adapterPosition)
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
 
