@@ -102,15 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertUserData() {
-        var captureData = captureURL.split("?")
-        var splitData = captureData[1].split("&", "=")
-        val user = User.create(splitData[1],splitData[3],splitData[5])
-        thread {
-            database?.userDao()?.insert(user)
-        }
-    }
-
     private fun navigateUserList() {
         val intent = Intent(this, UserIndexActivity::class.java)
         startActivity(intent)
@@ -132,8 +123,6 @@ class MainActivity : AppCompatActivity() {
                 captureURL = result.contents
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 navigateUserShow(captureURL)
-//                insertUserData()
-//                navigateUserList()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
