@@ -2,6 +2,7 @@ package jp.co.cyberagent.dojo2019.Presentation
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -94,10 +95,17 @@ class UserShowActivity : AppCompatActivity() {
     }
 
     private fun showGithubImage() {
-        Picasso.get()
-            .load("https://github.com/"+ user?.githubID +".png")
-            .resize(300, 300)
-            .centerCrop()
-            .into(githubUserImage)
+        if (user?.githubID.isNullOrBlank()) {
+            val drawable: Drawable? = getDrawable(R.drawable.failed)
+            drawable?: return
+            githubUserImage.setImageDrawable(drawable)
+        } else {
+            Picasso.get()
+                .load("https://github.com/"+ user?.githubID +".png")
+                .resize(300, 300)
+                .centerCrop()
+                .into(githubUserImage)
+        }
+
     }
 }
