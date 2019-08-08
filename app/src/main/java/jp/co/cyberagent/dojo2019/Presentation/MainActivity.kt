@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val context = applicationContext
-        database = AppDatabase.getDatabase(context)
+        database = AppDatabase.getDatabase(this)
 
         iamEditText = findViewById(R.id.user_iam)
         githubEditText = findViewById(R.id.user_github)
