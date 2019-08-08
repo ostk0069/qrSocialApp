@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Database
+package jp.co.cyberagent.dojo2019.Presentation
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Model.User
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.R
