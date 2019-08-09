@@ -44,14 +44,12 @@ class MainActivity : AppCompatActivity() {
         showQRButton = findViewById(R.id.showQR)
         userListButton = findViewById(R.id.btn_user_list)
         cameraButton = findViewById(R.id.btn_camera)
-
         setUser()
 
         submitButton.setOnClickListener {
             val iam: String = iamEditText.text.toString()
             val githubID: String = githubEditText.text.toString()
             val twitterID: String = twitterEditText.text.toString()
-            createUser(iam, githubID, twitterID)
             createQRImage(iam, githubID, twitterID)
         }
 
@@ -69,7 +67,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createQRImage(iam: String, githubID: String, twitterID: String) {
-        if (iam.isNotEmpty() && githubID.isNotEmpty()) {
+        if (githubID.isNotEmpty()) {
+            createUser(iam, githubID, twitterID)
             val encodedIam: String = Uri.encode(iam)
             val encodedGithubId: String = Uri.encode(githubID)
             val encodedTwitterId: String = Uri.encode(twitterID)
