@@ -79,14 +79,12 @@ class UserShowActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val existUser = database?.userDao()?.findUserByGithubId(githubID)
             if (existUser != null) {
-                user?.iam = existUser.iam
-                user?.githubID = existUser.githubID
-                user?.twitterID = existUser.twitterID
-            } else {
-                user = User.create(iam, githubID, twitterID)
-                val userData = user?: return@launch
-                database?.userDao()?.insert(userData)
+                // there is user with same github id exist. delete old & save new.
+                database?.userDao()?.deleteByUid(existUser.uid)
             }
+            user = User.create(iam, githubID, twitterID)
+            val userData = user?: return@launch
+            database?.userDao()?.insert(userData)
         }
     }
 
