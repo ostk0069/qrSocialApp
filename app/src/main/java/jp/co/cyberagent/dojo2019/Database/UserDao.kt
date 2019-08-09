@@ -1,10 +1,9 @@
 package jp.co.cyberagent.dojo2019.Database
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import jp.co.cyberagent.dojo2019.Model.User
+import jp.co.cyberagent.dojo2019.Entity.User
 
 @Dao
 interface UserDao {

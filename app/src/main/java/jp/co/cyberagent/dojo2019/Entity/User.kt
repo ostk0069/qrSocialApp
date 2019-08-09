@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Model
+package jp.co.cyberagent.dojo2019.Entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

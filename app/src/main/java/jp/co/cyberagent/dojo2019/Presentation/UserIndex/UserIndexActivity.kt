@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.*
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
-import jp.co.cyberagent.dojo2019.Model.User
+import jp.co.cyberagent.dojo2019.Entity.User
 import kotlinx.coroutines.*
 
 class UserIndexActivity : AppCompatActivity() {
@@ -36,8 +36,10 @@ class UserIndexActivity : AppCompatActivity() {
         swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
 
         lifecycleScope.launch {
-            userList = database?.userDao()?.getAll()!!.toMutableList()
-            adapter.updateUserList(userList)
+            withContext(Dispatchers.Main) {
+                userList = database?.userDao()?.getAll()!!.toMutableList()
+                adapter.updateUserList(userList)
+            }
         }
     }
 
@@ -55,11 +57,15 @@ class UserIndexActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
+
                 lifecycleScope.launch {
-                    database?.userDao()?.deleteByUid(userList[position].uid)
+                    val uid = userList[position].uid
                     userList.removeAt(position)
+                    adapter.notifyItemRemoved(position)
+                    database?.userDao()?.deleteByUid(uid)
+                    adapter.notifyDataSetChanged()
                 }
-                adapter.notifyItemRemoved(position)
+//                adapter.notifyItemRemoved(position)
             }
 
             override fun onChildDraw(

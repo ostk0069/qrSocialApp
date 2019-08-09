@@ -13,7 +13,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
-import jp.co.cyberagent.dojo2019.Model.User
+import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.R
 import kotlinx.coroutines.launch
