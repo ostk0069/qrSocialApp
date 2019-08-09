@@ -1,5 +1,6 @@
 package jp.co.cyberagent.dojo2019.Presentation
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         showQRButton = findViewById(R.id.showQR)
         userListButton = findViewById(R.id.btn_user_list)
         cameraButton = findViewById(R.id.btn_camera)
+
+        setUser()
 
         submitButton.setOnClickListener {
             val iam: String = iamEditText.text.toString()
@@ -98,10 +101,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createUser(iam: String, githubID: String, twitterID: String) {
-        val user = User.create(iam, githubID, twitterID)
-        lifecycleScope.launch {
-            database?.userDao()?.insert(user)
-        }
+        val adminUser = getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
+        val editor = adminUser.edit()
+        editor.putString("iam", iam)
+        editor.putString("GithubID", githubID)
+        editor.putString("twitterID", twitterID)
+        editor.apply()
+    }
+
+    private fun setUser() {
+        val setData = getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
+        val iam = setData.getString("iam", "")
+        val githubID = setData.getString("GithubID", "")
+        val twitterID = setData.getString("twitterID", "")
+        iamEditText.setText(iam)
+        githubEditText.setText(githubID)
+        twitterEditText.setText(twitterID)
+
     }
 
     private fun navigateUserList() {
