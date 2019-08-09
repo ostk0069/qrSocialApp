@@ -13,10 +13,7 @@ interface UserDao {
     suspend fun getAll(): List<User>
 
     @Insert
-    fun insert(user: User)
-
-    @Delete
-    fun delete(user: User)
+    suspend fun insert(user: User)
 
     @Query("DELETE FROM user WHERE uid = :uid")
     suspend fun deleteByUid(uid: Int)

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -16,6 +17,7 @@ import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Model.User
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.R
+import kotlinx.coroutines.launch
 import java.lang.Exception
 import kotlin.concurrent.thread
 
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createUser(iam: String, githubID: String, twitterID: String) {
         val user = User.create(iam, githubID, twitterID)
-        thread {
+        lifecycleScope.launch {
             database?.userDao()?.insert(user)
         }
     }
