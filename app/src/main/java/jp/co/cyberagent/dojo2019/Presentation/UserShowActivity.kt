@@ -76,10 +76,17 @@ class UserShowActivity : AppCompatActivity() {
         val iam: String = uri.getQueryParameter("iam").toString()
         val githubID: String = uri.getQueryParameter("gh").toString()
         val twitterID: String = uri.getQueryParameter("tw").toString()
-        user = User.create(iam, githubID, twitterID)
-        val userData = user?: return
         lifecycleScope.launch {
-            database?.userDao()?.insert(userData)
+            val existUser = database?.userDao()?.findUserByGithubId(githubID)
+            if (existUser != null) {
+                user?.iam = existUser.iam
+                user?.githubID = existUser.githubID
+                user?.twitterID = existUser.twitterID
+            } else {
+                user = User.create(iam, githubID, twitterID)
+                val userData = user?: return@launch
+                database?.userDao()?.insert(userData)
+            }
         }
     }
 

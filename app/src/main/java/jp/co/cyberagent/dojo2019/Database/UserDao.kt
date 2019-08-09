@@ -17,4 +17,7 @@ interface UserDao {
 
     @Query("DELETE FROM user WHERE uid = :uid")
     suspend fun deleteByUid(uid: Int)
+
+    @Query("SELECT * FROM user WHERE github_id = :githubID")
+    suspend fun findUserByGithubId(githubID: String): User
 }

@@ -3,6 +3,7 @@ package jp.co.cyberagent.dojo2019.Presentation
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -73,7 +74,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun createQRImage(iam: String, githubID: String, twitterID: String) {
         if (iam.isNotEmpty() && githubID.isNotEmpty()) {
-            val url = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
+            val encodedIam: String = Uri.encode(iam)
+            val encodedGithubId: String = Uri.encode(githubID)
+            val encodedTwitterId: String = Uri.encode(twitterID)
+            val url  = "ca-tech://dojo/share?iam=$encodedIam&gh=$encodedGithubId&tw=$encodedTwitterId"
             try {
                 val barcodeEncoder = BarcodeEncoder()
                 bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
