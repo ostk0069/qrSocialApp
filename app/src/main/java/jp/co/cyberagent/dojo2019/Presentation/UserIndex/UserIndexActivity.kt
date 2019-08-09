@@ -34,10 +34,15 @@ class UserIndexActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(adapter)
         swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
+        insertUserData()
 
+    }
+
+    private fun insertUserData() {
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
-                userList = database?.userDao()?.getAll()!!.toMutableList()
+                val userListData = database?.userDao()?.getAll()?: return@withContext
+                userList = userListData.toMutableList()
                 adapter.updateUserList(userList)
             }
         }

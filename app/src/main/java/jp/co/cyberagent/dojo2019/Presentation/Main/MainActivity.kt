@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation
+package jp.co.cyberagent.dojo2019.Presentation.Main
 
 import android.content.Context
 import android.content.Intent
@@ -16,6 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
+import jp.co.cyberagent.dojo2019.Presentation.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
 import java.lang.Exception
 
