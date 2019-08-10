@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Dojo2019</string>
     <string name="img_description">image1</string>
+    <string name="title_activity_bottom_tab">BottomTabActivity</string>
+    <string name="title_home">Profile</string>
+    <string name="title_dashboard">QR</string>
+    <string name="title_notifications">List</string>
 </resources>

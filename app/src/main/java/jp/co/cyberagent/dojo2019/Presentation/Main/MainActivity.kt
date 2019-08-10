@@ -15,6 +15,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
+import jp.co.cyberagent.dojo2019.Presentation.BottomTabActivity
 import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.Presentation.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateUserList() {
-        val intent = Intent(this, UserIndexActivity::class.java)
+        val intent = Intent(this, BottomTabActivity::class.java)
         startActivity(intent)
     }
 
