@@ -13,11 +13,8 @@
         <activity android:name=".Presentation.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.UserList.UserListActivity">
         </activity>
         <activity android:name=".Presentation.UserShowActivity">
             <intent-filter>
@@ -27,7 +24,7 @@
                 <data android:scheme="ca-tech" android:host="dojo" />
             </intent-filter>
         </activity>
-        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity">
+        <activity android:name=".Presentation.UserIndex.UserIndexActivity">
         </activity>
         <activity android:name=".Presentation.WebViewActivity">
         </activity>
