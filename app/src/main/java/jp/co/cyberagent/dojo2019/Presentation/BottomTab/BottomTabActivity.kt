@@ -1,9 +1,8 @@
-package jp.co.cyberagent.dojo2019.Presentation
+package jp.co.cyberagent.dojo2019.Presentation.BottomTab
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
 import jp.co.cyberagent.dojo2019.R
 
 class BottomTabActivity : AppCompatActivity() {

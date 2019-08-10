@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation
+package jp.co.cyberagent.dojo2019.Presentation.BottomTab
 
 import android.os.Bundle
 import android.view.LayoutInflater

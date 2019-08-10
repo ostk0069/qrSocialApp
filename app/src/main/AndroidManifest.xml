@@ -12,7 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".Presentation.BottomTabActivity"
+                android:name=".Presentation.BottomTab.BottomTabActivity"
                 android:label="@string/title_activity_bottom_tab">
         </activity>
         <activity android:name=".Presentation.Main.MainActivity">
