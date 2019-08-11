@@ -1,5 +1,6 @@
 package jp.co.cyberagent.dojo2019.Database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,6 +11,9 @@ interface UserDao {
 
     @Query("SELECT * FROM user")
     suspend fun getAll(): List<User>
+
+    @Query("SELECT * FROM user")
+    suspend fun getLiveUsers(): LiveData<List<User>>
 
     @Insert
     suspend fun insert(user: User)
