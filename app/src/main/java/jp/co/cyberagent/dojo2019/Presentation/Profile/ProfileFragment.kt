@@ -11,14 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.zxing.BarcodeFormat
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import jp.co.cyberagent.dojo2019.R
-import java.lang.Exception
 
 class ProfileFragment : Fragment() {
 
-    private var bitmap: Bitmap? = null
     private lateinit var viewModel: ProfileViewModel
 
     private lateinit var iamEditText: EditText
@@ -38,44 +34,33 @@ class ProfileFragment : Fragment() {
             val iam: String = iamEditText.text.toString()
             val githubID: String = githubEditText.text.toString()
             val twitterID: String = twitterEditText.text.toString()
-            createQRImage(iam, githubID, twitterID)
+            createUser(iam, githubID, twitterID)
+            // TODO: navigate to qr tab
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return  inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    private fun createQRImage(iam: String, githubID: String, twitterID: String) {
+    private fun createUser(iam: String, githubID: String, twitterID: String) {
         if (githubID.isNotEmpty()) {
-            createUser(iam, githubID, twitterID)
-            val encodedIam: String = Uri.encode(iam)
-            val encodedGithubId: String = Uri.encode(githubID)
-            val encodedTwitterId: String = Uri.encode(twitterID)
-            val url  = "ca-tech://dojo/share?iam=$encodedIam&gh=$encodedGithubId&tw=$encodedTwitterId"
-            try {
-                val barcodeEncoder = BarcodeEncoder()
-                bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
-
-                // TODO: navigate to qr tab
-            } catch(error: Exception) {
-                throw Exception("failed to create QR")
-            }
+            val adminUser = this.activity?.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
+            val editor = adminUser?.edit()
+            editor?.putString("iam", iam)
+            editor?.putString("GithubID", githubID)
+            editor?.putString("twitterID", twitterID)
+            editor?.apply()
         } else {
             Toast.makeText(
                 view?.context,
-                "QRコード生成にはGitHubIDが必要です",
+                "GitHubIDが正しくありません",
                 Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun createUser(iam: String, githubID: String, twitterID: String) {
-        val adminUser = this.activity?.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
-        val editor = adminUser?.edit()
-        editor?.putString("iam", iam)
-        editor?.putString("GithubID", githubID)
-        editor?.putString("twitterID", twitterID)
-        editor?.apply()
     }
 
     private fun setUser() {
