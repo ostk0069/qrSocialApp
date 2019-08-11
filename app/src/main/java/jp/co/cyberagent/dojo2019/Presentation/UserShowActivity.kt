@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Entity.User
-import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
+//import jp.co.cyberagent.dojo2019.Presentation.UserIndex.UserIndexActivity
 import jp.co.cyberagent.dojo2019.R
 import kotlinx.coroutines.launch
 
@@ -89,8 +89,8 @@ class UserShowActivity : AppCompatActivity() {
     }
 
     private fun navigateUserList() {
-        val intent = Intent(this, UserIndexActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, UserIndexActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun navigateWebView(context: Context, url: String) {

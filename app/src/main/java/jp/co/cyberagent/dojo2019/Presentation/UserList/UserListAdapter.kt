@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.UserIndex
+package jp.co.cyberagent.dojo2019.Presentation.UserList
 
 import android.content.Context
 import android.content.Intent
@@ -9,18 +9,18 @@ import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Presentation.WebViewActivity
 
-class UserIndexAdapter(private val context: Context, private val userList: MutableList<User>) :
-    RecyclerView.Adapter<UserIndexViewHolder>() {
+class UserListAdapter(private val context: Context, private val userList: MutableList<User>) :
+    RecyclerView.Adapter<UserListViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserIndexViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.user_cell, parent, false)
-        return UserIndexViewHolder(view)
+        return UserListViewHolder(view)
     }
 
     override fun getItemCount(): Int = userList.size
 
-    override fun onBindViewHolder(holder: UserIndexViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
         val user = userList[position]
         holder.iamTextView.text = user.iam
         holder.githubTextView.text = user.githubID
