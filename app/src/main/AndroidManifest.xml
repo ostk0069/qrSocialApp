@@ -19,21 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.Main.MainActivity">
-        </activity>
         <activity android:name=".Presentation.UserShowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-
                 <data
                         android:host="dojo"
                         android:scheme="ca-tech"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".Presentation.UserIndex.UserIndexActivity">
         </activity>
         <activity android:name=".Presentation.WebViewActivity">
         </activity>
