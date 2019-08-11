@@ -14,7 +14,6 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Presentation.BottomTab.BottomTabActivity
 import jp.co.cyberagent.dojo2019.Presentation.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
@@ -23,8 +22,6 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
 
     private var bitmap: Bitmap? = null
-    private var database: AppDatabase? = null
-    private var captureURL = ""
     private lateinit var iamEditText: EditText
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
@@ -36,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        database = AppDatabase.getDatabase(this)
 
         iamEditText = findViewById(R.id.user_iam)
         githubEditText = findViewById(R.id.user_github)
@@ -117,7 +113,6 @@ class MainActivity : AppCompatActivity() {
         iamEditText.setText(iam)
         githubEditText.setText(githubID)
         twitterEditText.setText(twitterID)
-
     }
 
     private fun navigateUserList() {
@@ -138,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
-                captureURL = result.contents
+                val captureURL = result.contents
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 navigateUserShow(captureURL)
             }

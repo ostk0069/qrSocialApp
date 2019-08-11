@@ -14,13 +14,12 @@
         <activity
                 android:name=".Presentation.BottomTab.BottomTabActivity"
                 android:label="@string/title_activity_bottom_tab">
-        </activity>
-        <activity android:name=".Presentation.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".Presentation.Main.MainActivity">
         </activity>
         <activity android:name=".Presentation.UserShowActivity">
             <intent-filter>

@@ -3,6 +3,7 @@ package jp.co.cyberagent.dojo2019.Presentation.BottomTab
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import jp.co.cyberagent.dojo2019.Presentation.Profile.ProfileFragment
 import jp.co.cyberagent.dojo2019.R
 
 class BottomTabActivity : AppCompatActivity() {

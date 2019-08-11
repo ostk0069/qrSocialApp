@@ -1,11 +1,11 @@
-package jp.co.cyberagent.dojo2019.Presentation.Main
+package jp.co.cyberagent.dojo2019.Presentation.Profile
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import jp.co.cyberagent.dojo2019.Repository.MainRepository
 
-class MainViewModel: ViewModel() {
+class ProfileViewModel: ViewModel() {
 
     var liveGithubText: MutableLiveData<String> = MutableLiveData()
 
