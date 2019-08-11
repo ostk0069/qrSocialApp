@@ -89,6 +89,7 @@ class UserShowActivity : AppCompatActivity() {
     }
 
     private fun navigateUserList() {
+        // TODO: select user list to be navigated
         val intent = Intent(this, BottomTabActivity::class.java)
         startActivity(intent)
     }
