@@ -53,7 +53,7 @@ class UserListFragment : Fragment() {
 
     private fun insertUserData() {
         lifecycleScope.launch {
-            withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main) { 
                 val userListData = database?.userDao()?.getAll()?: return@withContext
                 userList = userListData.toMutableList()
                 adapter.updateUserList(userList)
