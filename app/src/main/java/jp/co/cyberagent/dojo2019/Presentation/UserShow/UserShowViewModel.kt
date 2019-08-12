@@ -2,16 +2,14 @@ package jp.co.cyberagent.dojo2019.Presentation.UserShow
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Entity.User
+import kotlinx.coroutines.launch
 
 class UserShowViewModel(context: Context) : ViewModel() {
 
     private val database = AppDatabase.getDatabase(context)
-
-    suspend fun findUserByGithubID(id: String): User? {
-        return database?.userDao()?.findUserByGithubId(id)
-    }
 
     suspend fun deleteByUid(uid: Int) {
         database?.userDao()?.deleteByUid(uid)
@@ -27,6 +25,12 @@ class UserShowViewModel(context: Context) : ViewModel() {
         if (existUser != null) {
             database?.userDao()?.deleteByUid(existUser.uid)
         }
+    }
 
+    fun insertOrUpdateUser(id: String, user: User?) {
+        viewModelScope.launch {
+            deleteUserIfGithubIDAvailable(id)
+            insertUser(user)
+        }
     }
 }

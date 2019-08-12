@@ -42,17 +42,11 @@ class UserShowActivity : AppCompatActivity() {
         twitterButton = findViewById(R.id.btn_twitter)
         viewModel = UserShowViewModel(this)
 
-        var captureUri: Uri?
-        if (intent?.data == null) {
-            captureUri = intent?.getStringExtra("url")?.toUri()
-        } else {
-            captureUri = intent?.data
-        }
-        createUserFromUri(captureUri)
+        createUserFromUri()
+        showGithubImage()
         iamText.text = user?.iam
         githubText.text = user?.githubID
         twitterText.text = user?.twitterID
-        showGithubImage()
 
         userListButton.setOnClickListener {
             navigateUserList()
@@ -69,28 +63,19 @@ class UserShowActivity : AppCompatActivity() {
         }
     }
 
-    private fun createUserFromUri(uri: Uri?) {
-        val uri: Uri = uri?: return
+    private fun createUserFromUri() {
+        var captureUri: Uri?
+        if (intent?.data == null) {
+            captureUri = intent?.getStringExtra("url")?.toUri()
+        } else {
+            captureUri = intent?.data
+        }
+        val uri: Uri = captureUri?: return
         val iam: String = uri.getQueryParameter("iam").toString()
         val githubID: String = uri.getQueryParameter("gh").toString()
         val twitterID: String = uri.getQueryParameter("tw").toString()
         user = User.create(iam, githubID, twitterID)
-        lifecycleScope.launch {
-            viewModel.deleteUserIfGithubIDAvailable(githubID)
-            viewModel.insertUser(user)
-        }
-    }
-
-    private fun navigateUserList() {
-        // TODO: select user list tab to be navigated
-        val intent = Intent(this, BottomTabActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun navigateWebView(url: String) {
-        val intent = Intent(this, WebViewActivity::class.java)
-        intent.putExtra("url", url)
-        startActivity(intent)
+        viewModel.insertOrUpdateUser(githubID, user)
     }
 
     private fun showGithubImage() {
@@ -106,6 +91,17 @@ class UserShowActivity : AppCompatActivity() {
                 .centerCrop()
                 .into(githubUserImage)
         }
+    }
 
+    private fun navigateUserList() {
+        // TODO: select user list tab to be navigated
+        val intent = Intent(this, BottomTabActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateWebView(url: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("url", url)
+        startActivity(intent)
     }
 }
