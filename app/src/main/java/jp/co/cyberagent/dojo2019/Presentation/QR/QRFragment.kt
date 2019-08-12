@@ -60,10 +60,6 @@ class QRFragment : Fragment() {
             val barcodeEncoder = BarcodeEncoder()
             val bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
             qrImageView.setImageBitmap(bitmap)
-            Toast.makeText(
-                view?.context,
-                "QRコードの作成に成功しました",
-                Toast.LENGTH_LONG).show()
         } catch(error: Exception) {
             throw Exception("QRコードの作成に失敗しました")
         }
