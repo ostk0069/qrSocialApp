@@ -23,12 +23,26 @@ class QRFragment : Fragment() {
 
     private lateinit var qrImageView: ImageView
     private lateinit var cameraButton: Button
+    private lateinit var viewModel: QRViewModel
+    private var iam: String = ""
+    private var githubID: String = ""
+    private var twitterID: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         qrImageView = view.findViewById(R.id.qr_image)
         cameraButton = view.findViewById(R.id.camera)
-        setQRUrl()
+        viewModel = QRViewModel(view.context)
+
+        iam = viewModel.fetchUserIam()
+        githubID = viewModel.fetchUserGitHubID()
+        twitterID = viewModel.fetchUserTwitterID()
+
+        if (githubID.isEmpty()) {
+            setFailedImage()
+        } else {
+            createQR()
+        }
 
         cameraButton.setOnClickListener {
             IntentIntegrator(this.activity).initiateScan()
@@ -42,40 +56,29 @@ class QRFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_qr, container, false)
     }
 
-    private fun setQRUrl() {
-        val setData = this.activity?.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
-        val iam = setData?.getString("iam", "")
-        val githubID = setData?.getString("GithubID", "")
-        val twitterID = setData?.getString("twitterID", "")
-        encodeSetData(iam, githubID, twitterID)
-    }
-
-    private fun encodeSetData(iam: String?, githubID: String?, twitterID: String?) {
-        val encodedIam: String = Uri.encode(iam)
-        val encodedGithubId: String = Uri.encode(githubID)
-        val encodedTwitterId: String = Uri.encode(twitterID)
-        if (encodedGithubId.isEmpty()) {
-            val drawable: Drawable? = this.context?.getDrawable(R.drawable.failed)
-            drawable?: return
-            qrImageView.setImageDrawable(drawable)
-            Toast.makeText(
-                view?.context,
-                "プロフィールの作成を事前に行ってください",
-                Toast.LENGTH_LONG).show()
-        } else {
-            val url  = "ca-tech://dojo/share?iam=$encodedIam&gh=$encodedGithubId&tw=$encodedTwitterId"
-            createQR(url)
-        }
-    }
-
-    private fun createQR(url: String) {
+    private fun createQR() {
+        val url  = "ca-tech://dojo/share?iam=$iam&gh=$githubID&tw=$twitterID"
         try {
             val barcodeEncoder = BarcodeEncoder()
             val bitmap = barcodeEncoder.encodeBitmap(url, BarcodeFormat.QR_CODE, 500, 500)
             qrImageView.setImageBitmap(bitmap)
+            Toast.makeText(
+                view?.context,
+                "QRコードの作成に成功しました",
+                Toast.LENGTH_LONG).show()
         } catch(error: Exception) {
-            throw Exception("failed to create QR")
+            throw Exception("QRコードの作成に失敗しました")
         }
+    }
+
+    private fun setFailedImage() {
+        val drawable: Drawable? = this.context?.getDrawable(R.drawable.failed)
+        drawable?: return
+        qrImageView.setImageDrawable(drawable)
+        Toast.makeText(
+            view?.context,
+            "プロフィールの作成を事前に行ってください",
+            Toast.LENGTH_LONG).show()
     }
 
     private fun navigateUserShow(url: String) {
