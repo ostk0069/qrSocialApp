@@ -1,9 +1,7 @@
 package jp.co.cyberagent.dojo2019.Presentation.QR
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,14 +32,14 @@ class QRFragment : Fragment() {
         cameraButton = view.findViewById(R.id.camera)
         viewModel = QRViewModel(view.context)
 
-        iam = viewModel.fetchUserIam()
-        githubID = viewModel.fetchUserGitHubID()
-        twitterID = viewModel.fetchUserTwitterID()
+        iam = viewModel.fetchEncodedUserIam()
+        githubID = viewModel.fetchEncodedUserGitHubID()
+        twitterID = viewModel.fetchEncodedUserTwitterID()
 
-        if (githubID.isEmpty()) {
-            setFailedImage()
-        } else {
+        if (githubID.isNotEmpty()) {
             createQR()
+        } else {
+            setFailedImage()
         }
 
         cameraButton.setOnClickListener {

@@ -3,25 +3,26 @@ package jp.co.cyberagent.dojo2019.Presentation.QR
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
+import jp.co.cyberagent.dojo2019.Repository.AdminUserRepository
 
-class QRViewModel(private val context: Context): ViewModel() {
+class QRViewModel(context: Context): ViewModel() {
 
     // TODO: fix to liveData string
 
-    private val setData = context.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
+    private var repository = AdminUserRepository(context)
 
-    fun fetchUserIam(): String {
-        val iam = setData?.getString("iam", "")
+    fun fetchEncodedUserIam(): String {
+        val iam = repository.fetchIam()
         return Uri.encode(iam)
     }
 
-    fun fetchUserGitHubID(): String {
-        val githubId = setData?.getString("GithubID", "")
+    fun fetchEncodedUserGitHubID(): String {
+        val githubId = repository.fetchGithubID()
         return Uri.encode(githubId)
     }
 
-    fun fetchUserTwitterID(): String {
-        val twitterId = setData?.getString("GithubID", "")
+    fun fetchEncodedUserTwitterID(): String {
+        val twitterId = repository.fetchTwitterID()
         return Uri.encode(twitterId)
     }
 }
