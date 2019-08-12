@@ -23,6 +23,7 @@ import kotlinx.coroutines.withContext
 class UserListFragment : Fragment() {
 
     private var database: AppDatabase? = null
+    private lateinit var viewModel: UserListViewModel
     private var userList = mutableListOf<User>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserListAdapter
@@ -31,6 +32,7 @@ class UserListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         database = AppDatabase.getDatabase(view.context)
+        viewModel = UserListViewModel(view.context)
         recyclerView = view.findViewById(R.id.user_list)
 
         recyclerView.setHasFixedSize(true)
