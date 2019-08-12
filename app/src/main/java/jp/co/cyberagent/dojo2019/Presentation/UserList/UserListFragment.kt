@@ -53,7 +53,7 @@ class UserListFragment : Fragment() {
 
     private fun insertUserData() {
         lifecycleScope.launch {
-            withContext(Dispatchers.Main) { 
+            withContext(Dispatchers.Main) {
                 val userListData = database?.userDao()?.getAll()?: return@withContext
                 userList = userListData.toMutableList()
                 adapter.updateUserList(userList)
@@ -87,39 +87,21 @@ class UserListFragment : Fragment() {
             }
 
             override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
+                c: Canvas, recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
+                dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
             ) {
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive)
+                super.onChildDraw(c, recyclerView, viewHolder,
+                    dX, dY, actionState, isCurrentlyActive)
                 val itemView = viewHolder.itemView
                 val background = ColorDrawable()
                 background.color = Color.parseColor("#f44336")
                 if (dX < 0)
-                    background.setBounds(
-                        itemView.right + dX.toInt(),
-                        itemView.top,
-                        itemView.right,
-                        itemView.bottom
-                    )
+                    background.setBounds(itemView.right + dX.toInt(),
+                        itemView.top, itemView.right, itemView.bottom)
                 else
-                    background.setBounds(
-                        itemView.left,
-                        itemView.top,
-                        itemView.left + dX.toInt(),
-                        itemView.bottom
-                    )
+                    background.setBounds(itemView.left, itemView.top,
+                        itemView.left + dX.toInt(), itemView.bottom)
                 background.draw(c)
             }
         })
