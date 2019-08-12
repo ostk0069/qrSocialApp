@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
-import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Presentation.BottomTab.BottomTabActivity
 import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
@@ -20,8 +19,8 @@ import kotlinx.coroutines.launch
 
 class UserShowActivity : AppCompatActivity() {
 
-    private var database: AppDatabase? = null
     private var user: User? = null
+    private lateinit var viewModel: UserShowViewModel
     private lateinit var iamText: TextView
     private lateinit var githubText: TextView
     private lateinit var twitterText: TextView
@@ -34,8 +33,6 @@ class UserShowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_show)
 
-        database = AppDatabase.getDatabase(this)
-
         iamText = findViewById(R.id.user_iam)
         githubText = findViewById(R.id.user_github)
         twitterText = findViewById(R.id.user_twitter)
@@ -43,6 +40,7 @@ class UserShowActivity : AppCompatActivity() {
         githubUserImage = findViewById(R.id.user_github_image)
         githubButton = findViewById(R.id.btn_github)
         twitterButton = findViewById(R.id.btn_twitter)
+        viewModel = UserShowViewModel(this)
 
         var captureUri: Uri?
         if (intent?.data == null) {
@@ -76,15 +74,10 @@ class UserShowActivity : AppCompatActivity() {
         val iam: String = uri.getQueryParameter("iam").toString()
         val githubID: String = uri.getQueryParameter("gh").toString()
         val twitterID: String = uri.getQueryParameter("tw").toString()
+        user = User.create(iam, githubID, twitterID)
         lifecycleScope.launch {
-            val existUser = database?.userDao()?.findUserByGithubId(githubID)
-            if (existUser != null) {
-                // there is user with same github id exist. delete old & save new.
-                database?.userDao()?.deleteByUid(existUser.uid)
-            }
-            user = User.create(iam, githubID, twitterID)
-            val userData = user?: return@launch
-            database?.userDao()?.insert(userData)
+            viewModel.deleteUserIfGithubIDAvailable(githubID)
+            viewModel.insertUser(user)
         }
     }
 

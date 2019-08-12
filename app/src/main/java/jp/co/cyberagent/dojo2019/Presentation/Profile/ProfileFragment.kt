@@ -13,12 +13,11 @@ import jp.co.cyberagent.dojo2019.R
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var viewModel: ProfileViewModel
-
     private lateinit var iamEditText: EditText
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,13 +25,14 @@ class ProfileFragment : Fragment() {
         githubEditText = view.findViewById(R.id.user_github)
         twitterEditText = view.findViewById(R.id.user_twitter)
         submitButton = view.findViewById(R.id.user_submit)
-        setUser()
+        viewModel = ProfileViewModel(view.context)
+
+        iamEditText.setText(viewModel.fetchIam())
+        githubEditText.setText(viewModel.fetchGithubID())
+        twitterEditText.setText(viewModel.fetchTwitterID())
 
         submitButton.setOnClickListener {
-            val iam: String = iamEditText.text.toString()
-            val githubID: String = githubEditText.text.toString()
-            val twitterID: String = twitterEditText.text.toString()
-            createUser(iam, githubID, twitterID)
+            createAdminUser()
             // TODO: navigate to qr tab
         }
     }
@@ -45,7 +45,10 @@ class ProfileFragment : Fragment() {
         return  inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    private fun createUser(iam: String, githubID: String, twitterID: String) {
+    private fun createAdminUser() {
+        val iam: String = iamEditText.text.toString()
+        val githubID: String = githubEditText.text.toString()
+        val twitterID: String = twitterEditText.text.toString()
         if (githubID.isNotEmpty()) {
             val adminUser = this.activity?.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
             val editor = adminUser?.edit()
@@ -59,15 +62,5 @@ class ProfileFragment : Fragment() {
                 "GitHubIDが正しくありません",
                 Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun setUser() {
-        val setData = this.activity?.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
-        val iam = setData?.getString("iam", "")
-        val githubID = setData?.getString("GithubID", "")
-        val twitterID = setData?.getString("twitterID", "")
-        iamEditText.setText(iam)
-        githubEditText.setText(githubID)
-        twitterEditText.setText(twitterID)
     }
 }

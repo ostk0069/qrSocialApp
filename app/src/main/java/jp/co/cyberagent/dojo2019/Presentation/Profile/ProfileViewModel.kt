@@ -7,7 +7,23 @@ import jp.co.cyberagent.dojo2019.Repository.AdminUserRepository
 
 class ProfileViewModel(context: Context): ViewModel() {
 
-//    var liveGithubText: MutableLiveData<String> = MutableLiveData()
+    // TODO: fix to liveData string
+
+    private val repository = AdminUserRepository(context)
+
+    fun fetchIam(): String {
+        return repository.fetchIam()
+    }
+
+    fun fetchGithubID(): String {
+        return repository.fetchGithubID()
+    }
+
+    fun fetchTwitterID(): String {
+        return repository.fetchTwitterID()
+    }
+
+// var liveGithubText: MutableLiveData<String> = MutableLiveData()
 //
 //    fun fetchText(context: Context) {
 //        liveGithubText.value = AdminUserRepository().fetchText(context)
