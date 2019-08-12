@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.UserShowActivity">
+        <activity android:name=".Presentation.UserShow.UserShowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -29,7 +29,7 @@
                         android:scheme="ca-tech"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.WebViewActivity">
+        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity">
         </activity>
     </application>
 

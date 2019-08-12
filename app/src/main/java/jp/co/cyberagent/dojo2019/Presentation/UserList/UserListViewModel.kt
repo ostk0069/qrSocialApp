@@ -20,7 +20,7 @@ class UserListViewModel(application: Application): AndroidViewModel(application)
     fun getUsers() {
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
-                repository.getUsers()
+//                repository.getUsers()
             }
         }
     }

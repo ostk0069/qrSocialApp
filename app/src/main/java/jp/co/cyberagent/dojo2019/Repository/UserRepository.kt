@@ -6,7 +6,7 @@ import jp.co.cyberagent.dojo2019.Entity.User
 
 class UserRepository(private val dao: UserDao) {
 
-    suspend fun getUsers(): LiveData<List<User>> {
-        return dao.getLiveUsers()
-    }
+//    suspend fun getUsers(): LiveData<List<User>> {
+//        return dao.getLiveUsers()
+//    }
 }

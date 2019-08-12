@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.Entity.User
-import jp.co.cyberagent.dojo2019.Presentation.WebViewActivity
+import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
 
 class UserListAdapter(private val context: Context, private val userList: MutableList<User>) :
     RecyclerView.Adapter<UserListViewHolder>() {

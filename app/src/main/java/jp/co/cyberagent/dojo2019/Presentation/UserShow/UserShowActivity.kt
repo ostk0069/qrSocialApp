@@ -1,6 +1,5 @@
-package jp.co.cyberagent.dojo2019.Presentation
+package jp.co.cyberagent.dojo2019.Presentation.UserShow
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -15,6 +14,7 @@ import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Presentation.BottomTab.BottomTabActivity
+import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
 import kotlinx.coroutines.launch
 
@@ -62,12 +62,12 @@ class UserShowActivity : AppCompatActivity() {
 
         githubButton.setOnClickListener {
             val githubURL = "https://github.com/${user?.githubID}"
-            navigateWebView(this, githubURL)
+            navigateWebView(githubURL)
         }
 
         twitterButton.setOnClickListener {
             val twitterURL = "https://twitter.com/${user?.twitterID}"
-            navigateWebView(this, twitterURL)
+            navigateWebView(twitterURL)
         }
     }
 
@@ -89,15 +89,15 @@ class UserShowActivity : AppCompatActivity() {
     }
 
     private fun navigateUserList() {
-        // TODO: select user list to be navigated
+        // TODO: select user list tab to be navigated
         val intent = Intent(this, BottomTabActivity::class.java)
         startActivity(intent)
     }
 
-    private fun navigateWebView(context: Context, url: String) {
-        val intent = Intent(context, WebViewActivity::class.java)
+    private fun navigateWebView(url: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
         intent.putExtra("url", url)
-        context.startActivity(intent)
+        startActivity(intent)
     }
 
     private fun showGithubImage() {

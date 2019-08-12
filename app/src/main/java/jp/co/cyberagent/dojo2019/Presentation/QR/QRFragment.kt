@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import jp.co.cyberagent.dojo2019.Presentation.UserShowActivity
+import jp.co.cyberagent.dojo2019.Presentation.UserShow.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
 import java.lang.Exception
 
