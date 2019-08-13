@@ -7,14 +7,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
 import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
-import jp.co.cyberagent.dojo2019.Presentation.QR.QRViewModel
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -22,8 +20,7 @@ class UserListAdapter(private val context: Context) :
     RecyclerView.Adapter<UserListViewHolder>(), CoroutineScope {
 
     var userList: MutableList<User> = mutableListOf()
-
-    var job: Job = Job()
+    private var job: Job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
