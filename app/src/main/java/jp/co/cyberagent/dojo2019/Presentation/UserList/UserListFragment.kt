@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,8 @@ class UserListFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         mAdapter = UserListAdapter(view.context)
         recyclerView.adapter = mAdapter
+        val decor = DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(decor)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         insertUserData()
         val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(mAdapter)
