@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Entity.User
+import jp.co.cyberagent.dojo2019.Presentation.Common.DateTime
 import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
 
@@ -26,6 +27,8 @@ class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserL
         holder.iamTextView.text = user.iam
         holder.githubTextView.text = user.githubID
         holder.twitterTextView.text = user.twitterID
+        val time = user.createdAt?: return
+        holder.datetimeTextView.text = DateTime().getCustomizedTime(time)
 
         val context = holder.itemView.context
         holder.githubLinearLayout.setOnClickListener {

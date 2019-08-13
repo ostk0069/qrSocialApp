@@ -13,4 +13,5 @@ class UserListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val twitterTextView: TextView = view.findViewById(R.id.user_twitter)
     val githubLinearLayout: LinearLayout = view.findViewById(R.id.github_linear_layout)
     val twitterLinearLayout: LinearLayout = view.findViewById(R.id.twitter_linear_layout)
+    val datetimeTextView: TextView = view.findViewById(R.id.datetime)
 }

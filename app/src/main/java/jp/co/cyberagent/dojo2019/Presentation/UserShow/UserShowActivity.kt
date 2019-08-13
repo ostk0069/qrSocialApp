@@ -18,6 +18,7 @@ import jp.co.cyberagent.dojo2019.Presentation.BottomTab.BottomTabActivity
 import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
 import kotlinx.coroutines.launch
+import java.util.*
 
 class UserShowActivity : AppCompatActivity() {
 
@@ -76,7 +77,8 @@ class UserShowActivity : AppCompatActivity() {
         val iam: String = uri.getQueryParameter("iam").toString()
         val githubID: String = uri.getQueryParameter("gh").toString()
         val twitterID: String = uri.getQueryParameter("tw").toString()
-        user = User.create(iam, githubID, twitterID)
+        val dateTime = Date().time
+        user = User.create(iam, githubID, twitterID, dateTime)
         viewModel.insertOrUpdateUser(githubID, user)
     }
 
