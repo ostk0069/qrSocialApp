@@ -74,25 +74,4 @@ class QRFragment : Fragment() {
             "プロフィールの作成を事前に行ってください",
             Toast.LENGTH_LONG).show()
     }
-
-    private fun navigateUserShow(url: String) {
-        val intent = Intent(view?.context, UserShowActivity::class.java)
-        intent.putExtra("url", url)
-        startActivity(intent)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(view?.context, "Cancelled", Toast.LENGTH_LONG).show()
-            } else {
-                val captureURL = result.contents
-                Toast.makeText(view?.context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-                navigateUserShow(captureURL)
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
 }

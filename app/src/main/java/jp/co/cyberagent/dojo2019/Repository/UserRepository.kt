@@ -26,7 +26,7 @@ class UserRepository(context: Context) {
         return database.userDao().getAll()
     }
 
-//    suspend fun getUsers(): LiveData<List<User>> {
-//        return dao.getLiveUsers()
-//    }
+    fun getLiveDataUsers(): LiveData<List<User>> {
+        return database.userDao().getLiveUsers()
+    }
 }

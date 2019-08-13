@@ -7,7 +7,7 @@ class AdminUserRepository(context: Context) {
     private val setData = context.getSharedPreferences("ca_dojo", Context.MODE_PRIVATE)
 
     fun fetchIam(): String {
-        val iam = setData.getString("¥iam", "")
+        val iam = setData.getString("iam", "")
         return iam.orEmpty()
     }
 
