@@ -3,7 +3,6 @@ package jp.co.cyberagent.dojo2019.Repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import jp.co.cyberagent.dojo2019.Database.AppDatabase
-import jp.co.cyberagent.dojo2019.Database.UserDao
 import jp.co.cyberagent.dojo2019.Entity.User
 
 class UserRepository(context: Context) {

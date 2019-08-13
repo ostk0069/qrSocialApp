@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Entity.User
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
 class UserShowActivity : AppCompatActivity() {
 
     private var user: User? = null
-    private lateinit var viewModel: UserShowViewModel
+    private val viewModel = ViewModelProviders.of(this)[UserShowViewModel::class.java]
     private lateinit var iamText: TextView
     private lateinit var githubText: TextView
     private lateinit var twitterText: TextView
@@ -40,7 +41,6 @@ class UserShowActivity : AppCompatActivity() {
         githubUserImage = findViewById(R.id.user_github_image)
         githubButton = findViewById(R.id.btn_github)
         twitterButton = findViewById(R.id.btn_twitter)
-        viewModel = UserShowViewModel(this)
 
         createUserFromUri()
         showGithubImage()

@@ -10,9 +10,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import jp.co.cyberagent.dojo2019.Presentation.UserList.UserListViewModel
 import jp.co.cyberagent.dojo2019.Presentation.UserShow.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
 import java.lang.Exception
@@ -21,16 +23,15 @@ class QRFragment : Fragment() {
 
     private lateinit var qrImageView: ImageView
     private lateinit var cameraButton: Button
-    private lateinit var viewModel: QRViewModel
     private var iam: String = ""
     private var githubID: String = ""
     private var twitterID: String = ""
+    private val viewModel = ViewModelProviders.of(this)[QRViewModel::class.java]
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         qrImageView = view.findViewById(R.id.qr_image)
         cameraButton = view.findViewById(R.id.camera)
-        viewModel = QRViewModel(view.context)
 
         iam = viewModel.fetchEncodedUserIam()
         githubID = viewModel.fetchEncodedUserGitHubID()
