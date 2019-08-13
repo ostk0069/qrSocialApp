@@ -1,12 +1,16 @@
 package jp.co.cyberagent.dojo2019.Presentation.UserList
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Entity.User
@@ -15,7 +19,7 @@ import jp.co.cyberagent.dojo2019.R
 class UserListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: UserListAdapter
+    private lateinit var mAdapter: UserListAdapter
     private lateinit var viewModel: UserListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,11 +29,11 @@ class UserListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this)[UserListViewModel::class.java]
 
         recyclerView.setHasFixedSize(true)
-        adapter = UserListAdapter(view.context)
-        recyclerView.adapter = adapter
+        mAdapter = UserListAdapter(view.context)
+        recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         insertUserData()
-        val swipeToDismissTouchHelper = adapter.getSwipeToDismissTouchHelper(adapter)
+        val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(mAdapter)
         swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
     }
 
@@ -41,9 +45,54 @@ class UserListFragment : Fragment() {
     }
 
     private fun insertUserData() {
-        viewModel.getLiveUsers().observe(this, Observer<List<User>> {
-            users -> adapter.updateUserList(users.toMutableList())
+        viewModel.getLiveUsers().observe(this, Observer<List<User>> { users ->
+            mAdapter.updateUserList(users.toMutableList())
         })
     }
 
+    fun getSwipeToDismissTouchHelper(adapter: RecyclerView.Adapter<UserListViewHolder>) =
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val uid = mAdapter.userList[position].uid
+                viewModel.deleteUser(uid)
+                adapter.notifyItemRemoved(position)
+            }
+
+            override fun onChildDraw(
+                c: Canvas, recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c, recyclerView, viewHolder,
+                    dX, dY, actionState, isCurrentlyActive
+                )
+                val itemView = viewHolder.itemView
+                val background = ColorDrawable()
+                background.color = Color.parseColor("#f44336")
+                if (dX < 0)
+                    background.setBounds(
+                        itemView.right + dX.toInt(),
+                        itemView.top, itemView.right, itemView.bottom
+                    )
+                else
+                    background.setBounds(
+                        itemView.left, itemView.top,
+                        itemView.left + dX.toInt(), itemView.bottom
+                    )
+                background.draw(c)
+            }
+        })
 }
