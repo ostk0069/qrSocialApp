@@ -1,7 +1,8 @@
 package jp.co.cyberagent.dojo2019.Presentation.Common
 
 class DateTime {
-    fun getCustomizedTime(time: Long): String {
+    fun getCustomizedTime(time: Long?): String {
+        time?: return ""
         val diff = System.currentTimeMillis() - time
 
         val sec = diff / 1000L

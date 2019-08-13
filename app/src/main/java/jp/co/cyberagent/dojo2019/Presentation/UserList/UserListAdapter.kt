@@ -27,8 +27,7 @@ class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserL
         holder.iamTextView.text = user.iam
         holder.githubTextView.text = user.githubID
         holder.twitterTextView.text = user.twitterID
-        val time = user.createdAt?: return
-        holder.datetimeTextView.text = DateTime().getCustomizedTime(time)
+        holder.datetimeTextView.text = DateTime().getCustomizedTime(user.createdAt)
 
         val context = holder.itemView.context
         holder.githubLinearLayout.setOnClickListener {
