@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import jp.co.cyberagent.dojo2019.R
@@ -18,7 +20,9 @@ class ProfileFragment : Fragment() {
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
+    private lateinit var validationMessage: TextView
     private lateinit var viewModel: ProfileViewModel
+//    private lateinit var binding:
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +31,9 @@ class ProfileFragment : Fragment() {
         githubEditText = view.findViewById(R.id.user_github)
         twitterEditText = view.findViewById(R.id.user_twitter)
         submitButton = view.findViewById(R.id.user_submit)
+        validationMessage = view.findViewById(R.id.validation_message)
+
+//        binding = DataBindingUtil.inf
 
         iamEditText.setText(viewModel.fetchIam())
         githubEditText.setText(viewModel.fetchGithubID())
@@ -34,7 +41,6 @@ class ProfileFragment : Fragment() {
 
         submitButton.setOnClickListener {
             createAdminUser()
-            // TODO: navigate to qr tab
         }
     }
 
