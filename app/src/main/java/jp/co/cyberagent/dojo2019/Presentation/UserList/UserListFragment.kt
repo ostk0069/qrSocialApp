@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 
 class UserListFragment : Fragment() {
 
-    private var userList = mutableListOf<User>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserListAdapter
     private lateinit var viewModel: UserListViewModel
@@ -32,12 +31,12 @@ class UserListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this)[UserListViewModel::class.java]
 
         recyclerView.setHasFixedSize(true)
-        adapter = UserListAdapter(view.context, userList)
+        adapter = UserListAdapter(view.context)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val swipeToDismissTouchHelper = getSwipeToDismissTouchHelper(adapter)
-        swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
         insertUserData()
+        val swipeToDismissTouchHelper = adapter.getSwipeToDismissTouchHelper(adapter)
+        swipeToDismissTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onCreateView(
@@ -53,46 +52,4 @@ class UserListFragment : Fragment() {
         })
     }
 
-    private fun getSwipeToDismissTouchHelper(adapter: RecyclerView.Adapter<UserListViewHolder>) =
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                lifecycleScope.launch {
-                    val uid = userList[position].uid
-                    userList.removeAt(position)
-                    adapter.notifyItemRemoved(position)
-                    viewModel.deleteUser(uid)
-                    adapter.notifyDataSetChanged()
-                }
-            }
-
-            override fun onChildDraw(
-                c: Canvas, recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
-            ) {
-                super.onChildDraw(c, recyclerView, viewHolder,
-                    dX, dY, actionState, isCurrentlyActive)
-                val itemView = viewHolder.itemView
-                val background = ColorDrawable()
-                background.color = Color.parseColor("#f44336")
-                if (dX < 0)
-                    background.setBounds(itemView.right + dX.toInt(),
-                        itemView.top, itemView.right, itemView.bottom)
-                else
-                    background.setBounds(itemView.left, itemView.top,
-                        itemView.left + dX.toInt(), itemView.bottom)
-                background.draw(c)
-            }
-        })
 }
