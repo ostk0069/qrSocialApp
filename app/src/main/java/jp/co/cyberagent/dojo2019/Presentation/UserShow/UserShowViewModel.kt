@@ -1,9 +1,7 @@
 package jp.co.cyberagent.dojo2019.Presentation.UserShow
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Repository.UserRepository
