@@ -56,6 +56,10 @@ class ProfileFragment : Fragment() {
             editor?.putString("GithubID", githubID)
             editor?.putString("twitterID", twitterID)
             editor?.apply()
+            Toast.makeText(
+                view?.context,
+                "プロフィールの作成に成功しました",
+                Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(
                 view?.context,
