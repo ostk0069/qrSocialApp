@@ -26,12 +26,13 @@ class QRFragment : Fragment() {
     private var iam: String = ""
     private var githubID: String = ""
     private var twitterID: String = ""
-    private val viewModel = ViewModelProviders.of(this)[QRViewModel::class.java]
+    private lateinit var viewModel: QRViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         qrImageView = view.findViewById(R.id.qr_image)
         cameraButton = view.findViewById(R.id.camera)
+        viewModel = ViewModelProviders.of(this)[QRViewModel::class.java]
 
         iam = viewModel.fetchEncodedUserIam()
         githubID = viewModel.fetchEncodedUserGitHubID()

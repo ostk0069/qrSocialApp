@@ -13,10 +13,6 @@ class UserShowViewModel(application: Application) : AndroidViewModel(application
 
     private val repository = UserRepository(application)
 
-    suspend fun deleteByUid(uid: Int) {
-        repository.deleteByUid(uid)
-    }
-
     suspend fun insertUser(user: User?) {
         val user = user?: return
         repository.insert(user)

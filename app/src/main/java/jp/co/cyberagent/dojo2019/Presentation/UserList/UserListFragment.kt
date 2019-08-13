@@ -24,12 +24,13 @@ class UserListFragment : Fragment() {
     private var userList = mutableListOf<User>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserListAdapter
-    private val viewModel = ViewModelProviders.of(this)[UserListViewModel::class.java]
+    private lateinit var viewModel: UserListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.user_list)
+        viewModel = ViewModelProviders.of(this)[UserListViewModel::class.java]
 
         recyclerView.setHasFixedSize(true)
         adapter = UserListAdapter(view.context, userList)

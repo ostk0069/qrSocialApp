@@ -18,10 +18,11 @@ class ProfileFragment : Fragment() {
     private lateinit var githubEditText: EditText
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
-    private val viewModel = ViewModelProviders.of(this)[ProfileViewModel::class.java]
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(this)[ProfileViewModel::class.java]
         iamEditText = view.findViewById(R.id.user_iam)
         githubEditText = view.findViewById(R.id.user_github)
         twitterEditText = view.findViewById(R.id.user_twitter)

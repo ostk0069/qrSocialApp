@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class UserShowActivity : AppCompatActivity() {
 
     private var user: User? = null
-    private val viewModel = ViewModelProviders.of(this)[UserShowViewModel::class.java]
+    private lateinit var viewModel:UserShowViewModel
     private lateinit var iamText: TextView
     private lateinit var githubText: TextView
     private lateinit var twitterText: TextView
@@ -33,6 +33,7 @@ class UserShowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_show)
+        viewModel = ViewModelProviders.of(this)[UserShowViewModel::class.java]
 
         iamText = findViewById(R.id.user_iam)
         githubText = findViewById(R.id.user_github)
