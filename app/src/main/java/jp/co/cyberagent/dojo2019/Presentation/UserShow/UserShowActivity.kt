@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -27,8 +28,8 @@ class UserShowActivity : AppCompatActivity() {
     private lateinit var twitterText: TextView
     private lateinit var userListButton: Button
     private lateinit var githubUserImage: ImageView
-    private lateinit var githubButton: Button
-    private lateinit var twitterButton: Button
+    private lateinit var githubLinearLayout: LinearLayout
+    private lateinit var twitterLinearLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +41,8 @@ class UserShowActivity : AppCompatActivity() {
         twitterText = findViewById(R.id.user_twitter)
         userListButton = findViewById(R.id.btn_user_list)
         githubUserImage = findViewById(R.id.user_github_image)
-        githubButton = findViewById(R.id.btn_github)
-        twitterButton = findViewById(R.id.btn_twitter)
+        githubLinearLayout = findViewById(R.id.github_linear_layout)
+        twitterLinearLayout = findViewById(R.id.twitter_linear_layout)
 
         createUserFromUri()
         showGithubImage()
@@ -53,12 +54,12 @@ class UserShowActivity : AppCompatActivity() {
             navigateUserList()
         }
 
-        githubButton.setOnClickListener {
+        githubLinearLayout.setOnClickListener {
             val githubURL = "https://github.com/${user?.githubID}"
             navigateWebView(githubURL)
         }
 
-        twitterButton.setOnClickListener {
+        twitterLinearLayout.setOnClickListener {
             val twitterURL = "https://twitter.com/${user?.twitterID}"
             navigateWebView(twitterURL)
         }

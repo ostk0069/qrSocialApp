@@ -12,54 +12,51 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" android:id="@+id/name_linear_layout">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_iam"
                 android:text="Name"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8sp"
-                android:layout_marginRight="8sp"
-                android:layout_marginBottom="8sp"
-                android:layout_marginLeft="8sp"
-        />
+                android:layout_marginRight="16sp"
+                android:layout_marginBottom="4sp"
+                android:layout_marginLeft="16sp"
+                android:textColor="#202124"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" android:id="@+id/github_linear_layout"
+            android:layout_marginBottom="8dp">
         <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/github_image"
                 app:srcCompat="@drawable/github"
-                android:layout_marginLeft="8sp"
+                android:layout_marginLeft="16sp"
                 android:layout_gravity="center"/>
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_github"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="8sp"
-                android:layout_marginRight="8sp"
-                android:layout_marginBottom="8sp"
-                android:layout_weight="1"/>
-        <Button
-                android:text="ブラウザで見る"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_github"
-                android:layout_marginRight="8sp"/>
+                android:layout_marginRight="16sp"
+                android:layout_weight="1"
+                android:textColor="#5f6368" android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/twitter_linear_layout"
+            android:layout_marginBottom="8dp">
         <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -67,25 +64,19 @@
                 tools:srcCompat="@tools:sample/avatars"
                 android:id="@+id/twitter_image"
                 app:srcCompat="@drawable/twitter"
-                android:layout_marginLeft="8sp"
+                android:layout_marginLeft="16sp"
                 android:layout_gravity="center"/>
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_twitter"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="8sp"
-                android:layout_marginRight="8sp"
-                android:layout_marginBottom="8sp"
-                android:layout_weight="1"/>
-        <Button
-                android:text="アプリで見る"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_twitter"
-                android:layout_marginRight="8sp"/>
+                android:layout_marginRight="16sp"
+                android:layout_weight="1"
+                android:textColor="#5f6368" android:layout_gravity="center"/>
     </LinearLayout>
     <Button
             android:text="Show User List"
