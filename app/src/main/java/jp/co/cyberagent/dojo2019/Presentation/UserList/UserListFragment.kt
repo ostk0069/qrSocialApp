@@ -64,10 +64,14 @@ class UserListFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                val uid = mAdapter.userList[position].uid
-                viewModel.deleteUser(uid)
-                adapter.notifyItemRemoved(position)
+                if (direction == ItemTouchHelper.LEFT) {
+                    val position = viewHolder.adapterPosition
+                    val uid = mAdapter.userList[position].uid
+                    viewModel.deleteUser(uid)
+                    adapter.notifyItemRemoved(position)
+                } else if (direction == ItemTouchHelper.RIGHT) {
+                    // TODO: add navigation to user detail
+                }
             }
 
             override fun onChildDraw(
@@ -81,17 +85,19 @@ class UserListFragment : Fragment() {
                 )
                 val itemView = viewHolder.itemView
                 val background = ColorDrawable()
-                background.color = Color.parseColor("#f44336")
-                if (dX < 0)
+                if (dX < 0) {
+                    background.color = Color.parseColor("#d0184c")
                     background.setBounds(
                         itemView.right + dX.toInt(),
                         itemView.top, itemView.right, itemView.bottom
                     )
-                else
+                } else {
+                    background.color = Color.parseColor("#17af98")
                     background.setBounds(
                         itemView.left, itemView.top,
                         itemView.left + dX.toInt(), itemView.bottom
                     )
+                }
                 background.draw(c)
             }
         })
