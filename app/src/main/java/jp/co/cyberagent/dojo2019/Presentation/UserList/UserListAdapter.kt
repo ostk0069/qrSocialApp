@@ -28,11 +28,11 @@ class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserL
         holder.twitterTextView.text = user.twitterID
 
         val context = holder.itemView.context
-        holder.githubButton.setOnClickListener {
+        holder.githubLinearLayout.setOnClickListener {
             val githubURL = "https://github.com/${user.githubID}"
             navigateWebView(context, githubURL)
         }
-        holder.twitterButton.setOnClickListener {
+        holder.twitterLinearLayout.setOnClickListener {
             val twitterURL = "https://twitter.com/${user.twitterID}"
             navigateWebView(context, twitterURL)
         }

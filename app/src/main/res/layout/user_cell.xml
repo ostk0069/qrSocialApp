@@ -14,7 +14,7 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:id="@+id/name_linear_layout">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -31,7 +31,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:id="@+id/github_linear_layout"
+                android:layout_marginBottom="8dp">
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -51,17 +52,12 @@
                     android:layout_marginRight="8sp"
                     android:layout_marginBottom="8sp"
                     android:layout_weight="1"/>
-            <Button
-                    android:text="ブラウザで見る"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn_github"
-                    android:layout_marginRight="8sp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:id="@+id/twitter_linear_layout"
+                android:layout_marginBottom="8dp">
             <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -82,12 +78,6 @@
                     android:layout_marginRight="8sp"
                     android:layout_marginBottom="8sp"
                     android:layout_weight="1"/>
-            <Button
-                    android:text="アプリで見る"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn_twitter"
-                    android:layout_marginRight="8sp"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
