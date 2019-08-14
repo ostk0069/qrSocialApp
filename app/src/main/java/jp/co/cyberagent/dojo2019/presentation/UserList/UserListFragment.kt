@@ -1,5 +1,6 @@
 package jp.co.cyberagent.dojo2019.presentation.UserList
 
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.R
+import jp.co.cyberagent.dojo2019.presentation.UserDetail.UserDetailActivity
 
 class UserListFragment : Fragment() {
 
@@ -73,7 +75,12 @@ class UserListFragment : Fragment() {
                     viewModel.deleteUser(uid)
                     adapter.notifyItemRemoved(position)
                 } else if (direction == ItemTouchHelper.RIGHT) {
-                    // TODO: add navigation to user detail
+                    val position = viewHolder.adapterPosition
+                    val uid = mAdapter.userList[position].uid
+                    val intent = Intent(context, UserDetailActivity::class.java)
+                    intent.putExtra("uid", uid)
+                    context?.startActivity(intent)
+                    adapter.notifyDataSetChanged()
                 }
             }
 

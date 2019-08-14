@@ -9,6 +9,7 @@ import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.presentation.Common.DateTime
 import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
+import jp.co.cyberagent.dojo2019.presentation.UserDetail.UserDetailActivity
 
 class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserListViewHolder>() {
 
@@ -30,6 +31,11 @@ class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserL
         holder.datetimeTextView.text = DateTime().getCustomizedTime(user.createdAt)
 
         val context = holder.itemView.context
+        holder.nameLinearLayout.setOnClickListener {
+            val intent = Intent(context, UserDetailActivity::class.java)
+            intent.putExtra("uid", user.uid)
+            context.startActivity(intent)
+        }
         holder.githubLinearLayout.setOnClickListener {
             val githubURL = "https://github.com/${user.githubID}"
             navigateWebView(context, githubURL)

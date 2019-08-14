@@ -21,11 +21,11 @@ class UserRepository(context: Context) {
         return database.userDao().findUserByGithubId(githubID)
     }
 
-    suspend fun getUsers(): List<User> {
-        return database.userDao().getAll()
-    }
-
     fun getLiveDataUsers(): LiveData<List<User>> {
         return database.userDao().getLiveUsers()
+    }
+
+    fun fetchUserBy(uid: Int): LiveData<User> {
+        return database.userDao().findUserBy(uid)
     }
 }

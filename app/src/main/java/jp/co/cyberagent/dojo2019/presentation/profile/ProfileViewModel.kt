@@ -1,7 +1,6 @@
 package jp.co.cyberagent.dojo2019.presentation.profile
 
 import android.app.Application
-import android.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import jp.co.cyberagent.dojo2019.R
@@ -14,8 +13,7 @@ class ProfileViewModel(application: Application): AndroidViewModel(application) 
     var validationMessageColor: MutableLiveData<Int> = MutableLiveData()
 
     init {
-        validationMessage.value = "GitHubIDを入力してください"
-        validationMessageColor.value = R.color.colorAccent
+        validationMessageColor.value = R.color.colorDark
     }
 
     fun fetchIam(): String {

@@ -44,9 +44,17 @@ class BottomTabActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, ProfileFragment())
-            .commit()
+        val isList: String? = intent.getStringExtra("list")
+        isList?.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, UserListFragment())
+                .commit()
+
+        } ?: run {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, ProfileFragment())
+                .commit()
+        }
     }
 
     private fun navigateUserShow(url: String) {
