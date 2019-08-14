@@ -54,4 +54,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha03"
     implementation "android.arch.lifecycle:livedata-core:1.1.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    def retrofitVersion = '2.4.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    implementation "com.squareup.moshi:moshi:1.5.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.5.0"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
 }
