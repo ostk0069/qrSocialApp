@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.UserShow
+package jp.co.cyberagent.dojo2019.presentation.UserShow
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

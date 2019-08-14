@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.BottomTab
+package jp.co.cyberagent.dojo2019.presentation.BottomTab
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
-import jp.co.cyberagent.dojo2019.Presentation.Profile.ProfileFragment
-import jp.co.cyberagent.dojo2019.Presentation.QR.QRFragment
-import jp.co.cyberagent.dojo2019.Presentation.UserList.UserListFragment
-import jp.co.cyberagent.dojo2019.Presentation.UserShow.UserShowActivity
+import jp.co.cyberagent.dojo2019.presentation.profile.ProfileFragment
+import jp.co.cyberagent.dojo2019.presentation.QR.QRFragment
+import jp.co.cyberagent.dojo2019.presentation.UserList.UserListFragment
+import jp.co.cyberagent.dojo2019.presentation.UserShow.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
 
 class BottomTabActivity : AppCompatActivity() {

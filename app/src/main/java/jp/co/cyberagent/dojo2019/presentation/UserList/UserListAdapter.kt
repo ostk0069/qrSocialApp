@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.UserList
+package jp.co.cyberagent.dojo2019.presentation.UserList
 
 import android.content.Context
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Entity.User
-import jp.co.cyberagent.dojo2019.Presentation.Common.DateTime
-import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
+import jp.co.cyberagent.dojo2019.presentation.Common.DateTime
+import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
 
 class UserListAdapter(private val context: Context) : RecyclerView.Adapter<UserListViewHolder>() {

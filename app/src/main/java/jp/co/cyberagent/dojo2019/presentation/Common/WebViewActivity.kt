@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.Common
+package jp.co.cyberagent.dojo2019.presentation.Common
 
 import android.os.Bundle
 import android.webkit.WebView

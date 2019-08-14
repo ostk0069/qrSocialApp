@@ -1,6 +1,5 @@
-package jp.co.cyberagent.dojo2019.Presentation.QR
+package jp.co.cyberagent.dojo2019.presentation.QR
 
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import jp.co.cyberagent.dojo2019.Presentation.UserList.UserListViewModel
-import jp.co.cyberagent.dojo2019.Presentation.UserShow.UserShowActivity
 import jp.co.cyberagent.dojo2019.R
 import java.lang.Exception
 

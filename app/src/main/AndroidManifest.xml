@@ -12,14 +12,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".Presentation.BottomTab.BottomTabActivity"
+                android:name=".presentation.BottomTab.BottomTabActivity"
                 android:label="@string/title_activity_bottom_tab">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.UserShow.UserShowActivity">
+        <activity android:name=".presentation.UserShow.UserShowActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -29,7 +29,7 @@
                         android:scheme="ca-tech"/>
             </intent-filter>
         </activity>
-        <activity android:name="jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity">
+        <activity android:name="jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity">
         </activity>
     </application>
 

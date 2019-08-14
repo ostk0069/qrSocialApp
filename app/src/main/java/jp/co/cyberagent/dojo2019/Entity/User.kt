@@ -3,8 +3,6 @@ package jp.co.cyberagent.dojo2019.Entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import jp.co.cyberagent.dojo2019.Presentation.Common.DateTime
-import java.util.*
 
 @Entity
 class User {

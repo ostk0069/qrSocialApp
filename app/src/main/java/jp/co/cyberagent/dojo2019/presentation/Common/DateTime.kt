@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.Common
+package jp.co.cyberagent.dojo2019.presentation.Common
 
 class DateTime {
     fun getCustomizedTime(time: Long?): String {

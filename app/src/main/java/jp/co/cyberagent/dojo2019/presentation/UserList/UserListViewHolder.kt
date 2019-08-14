@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.UserList
+package jp.co.cyberagent.dojo2019.presentation.UserList
 
 import android.view.View
 import android.widget.LinearLayout

@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.UserShow
+package jp.co.cyberagent.dojo2019.presentation.UserShow
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -11,13 +11,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Entity.User
-import jp.co.cyberagent.dojo2019.Presentation.BottomTab.BottomTabActivity
-import jp.co.cyberagent.dojo2019.Presentation.Common.WebViewActivity
+import jp.co.cyberagent.dojo2019.presentation.BottomTab.BottomTabActivity
+import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
 import jp.co.cyberagent.dojo2019.R
-import kotlinx.coroutines.launch
 import java.util.*
 
 class UserShowActivity : AppCompatActivity() {

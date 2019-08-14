@@ -1,10 +1,13 @@
-package jp.co.cyberagent.dojo2019.Presentation.Profile
+package jp.co.cyberagent.dojo2019.presentation.profile
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -13,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import jp.co.cyberagent.dojo2019.R
+import jp.co.cyberagent.dojo2019.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
@@ -21,19 +25,18 @@ class ProfileFragment : Fragment() {
     private lateinit var twitterEditText: EditText
     private lateinit var submitButton: Button
     private lateinit var validationMessage: TextView
-    private lateinit var viewModel: ProfileViewModel
-//    private lateinit var binding:
+    private lateinit var binding: FragmentProfileBinding
+    private val viewModel: ProfileViewModel by lazy {
+        ViewModelProviders.of(this)[ProfileViewModel::class.java]
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this)[ProfileViewModel::class.java]
         iamEditText = view.findViewById(R.id.user_iam)
         githubEditText = view.findViewById(R.id.user_github)
+        validationMessage = view.findViewById(R.id.validation_message)
         twitterEditText = view.findViewById(R.id.user_twitter)
         submitButton = view.findViewById(R.id.user_submit)
-        validationMessage = view.findViewById(R.id.validation_message)
-
-//        binding = DataBindingUtil.inf
 
         iamEditText.setText(viewModel.fetchIam())
         githubEditText.setText(viewModel.fetchGithubID())
@@ -41,7 +44,23 @@ class ProfileFragment : Fragment() {
 
         submitButton.setOnClickListener {
             createAdminUser()
+            hideKeyboard()
         }
+
+        githubEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                viewModel.fetchValidationMessage(p0?.length)
+                viewModel.fetchValidationMessageColor(p0?.length)
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.fetchValidationMessage(p0?.length)
+                viewModel.fetchValidationMessageColor(p0?.length)
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.fetchValidationMessage(p0?.length)
+                viewModel.fetchValidationMessageColor(p0?.length)
+            }
+        })
     }
 
     override fun onCreateView(
@@ -49,7 +68,10 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return  inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        return  binding.root
     }
 
     private fun createAdminUser() {
@@ -72,6 +94,14 @@ class ProfileFragment : Fragment() {
                 view?.context,
                 "GitHubIDが正しくありません",
                 Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val view = activity?.currentFocus
+        if (view != null) {
+            val manager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

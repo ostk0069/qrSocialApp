@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Presentation.QR
+package jp.co.cyberagent.dojo2019.presentation.QR
 
 import android.app.Application
 import android.net.Uri

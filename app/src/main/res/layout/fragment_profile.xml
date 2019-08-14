@@ -1,57 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.content.Context"/>
+        <variable name="viewModel" type="jp.co.cyberagent.dojo2019.presentation.profile.ProfileViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/user_iam"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:hint="name" android:layout_marginStart="8dp" android:layout_marginTop="32dp"
-            android:textSize="24sp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/user_github"
-            app:layout_constraintTop_toBottomOf="@+id/user_iam"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:hint="github(required)" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp" android:textSize="24sp"/>
-    <TextView
-            android:text="@{viewModel.validationMessage}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/validation_message"
-            app:layout_constraintTop_toBottomOf="@+id/user_github" app:layout_constraintEnd_toEndOf="@+id/user_github"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/user_github"
-            android:layout_marginStart="8dp" android:textAlignment="viewStart"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/user_twitter"
-            app:layout_constraintTop_toBottomOf="@+id/validation_message"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:hint="twitter" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp" android:textSize="24sp"/>
-    <Button
-            android:text="Submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_submit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_twitter"
-            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="24dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/user_iam"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="name" android:layout_marginStart="8dp" android:layout_marginTop="32dp"
+                android:textSize="24sp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/user_github"
+                app:layout_constraintTop_toBottomOf="@+id/user_iam"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="github(required)" android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="24sp" android:backgroundTint="@{context.getColor(viewModel.validationMessageColor)}"/>
+        <TextView
+                android:text="@{viewModel.validationMessage}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/validation_message"
+                app:layout_constraintTop_toBottomOf="@+id/user_github"
+                app:layout_constraintEnd_toEndOf="@+id/user_github"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="@+id/user_github"
+                android:layout_marginStart="8dp"
+                android:textAlignment="viewStart"
+                android:textColor="@{context.getColor(viewModel.validationMessageColor)}"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/user_twitter"
+                app:layout_constraintTop_toBottomOf="@+id/validation_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="twitter" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp" android:textSize="24sp"/>
+        <Button
+                android:text="Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_twitter"
+                android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="24dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
