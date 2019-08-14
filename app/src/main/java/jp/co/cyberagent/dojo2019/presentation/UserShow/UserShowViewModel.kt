@@ -19,7 +19,7 @@ class UserShowViewModel(application: Application) : AndroidViewModel(application
     suspend fun deleteUserIfGithubIDAvailable(githubID: String) {
         val existUser = repository.findUserBy(githubID)
         if (existUser != null) {
-            repository.deleteByUid(existUser.uid)
+            repository.deleteUserBy(existUser.uid)
         }
     }
 

@@ -10,15 +10,20 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.presentation.BottomTab.BottomTabActivity
 import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
+import jp.co.cyberagent.dojo2019.presentation.UserList.UserListAdapter
 
 class UserDetailActivity : AppCompatActivity() {
 
     private var user: User? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var mAdapter: UserDetailAdapter
     private lateinit var viewModel: UserDetailViewModel
     private lateinit var iamText: TextView
     private lateinit var githubText: TextView
@@ -32,7 +37,12 @@ class UserDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail)
 
+        mAdapter = UserDetailAdapter(this)
+        recyclerView = findViewById(R.id.user_recycler_view)
         viewModel = ViewModelProviders.of(this)[UserDetailViewModel::class.java]
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = mAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         iamText = findViewById(R.id.user_iam)
         githubText = findViewById(R.id.user_github)
@@ -44,6 +54,7 @@ class UserDetailActivity : AppCompatActivity() {
 
         val uid: Int = intent.getIntExtra("uid", 0)
         fetchUserBy(uid)
+        fetchReposBy(user?.githubID)
 
         userListButton.setOnClickListener {
             navigateUserList()
@@ -74,6 +85,11 @@ class UserDetailActivity : AppCompatActivity() {
         twitterText.text = user.twitterID
         showImageBy(user.githubID)
 
+    }
+
+    private fun fetchReposBy(githubID: String?) {
+        val githubId = githubID?: return
+        mAdapter.update(viewModel.fetchGithubReposBy(githubId))
     }
 
     private fun showImageBy(githubID: String?) {
