@@ -13,7 +13,7 @@ class UserRepository(context: Context) {
         database.userDao().insert(user)
     }
 
-    suspend fun deleteByUid(uid: Int) {
+    suspend fun deleteUserBy(uid: Int) {
         database.userDao().deleteByUid(uid)
     }
 

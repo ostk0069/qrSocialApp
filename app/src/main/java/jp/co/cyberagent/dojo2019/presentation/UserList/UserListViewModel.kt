@@ -12,9 +12,9 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
 
     private val repository: UserRepository = UserRepository(application)
 
-    fun deleteUser(uid: Int) {
+    fun deleteUserBy(uid: Int) {
         viewModelScope.launch {
-            repository.deleteByUid(uid)
+            repository.deleteUserBy(uid)
         }
     }
 

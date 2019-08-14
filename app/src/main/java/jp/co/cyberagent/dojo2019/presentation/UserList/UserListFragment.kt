@@ -72,7 +72,7 @@ class UserListFragment : Fragment() {
                 if (direction == ItemTouchHelper.LEFT) {
                     val position = viewHolder.adapterPosition
                     val uid = mAdapter.userList[position].uid
-                    viewModel.deleteUser(uid)
+                    viewModel.deleteUserBy(uid)
                     adapter.notifyItemRemoved(position)
                 } else if (direction == ItemTouchHelper.RIGHT) {
                     val position = viewHolder.adapterPosition

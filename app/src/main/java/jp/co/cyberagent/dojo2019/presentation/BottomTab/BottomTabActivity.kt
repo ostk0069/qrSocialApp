@@ -57,7 +57,7 @@ class BottomTabActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateUserShow(url: String) {
+    private fun navigateUserShowBy(url: String) {
         val intent = Intent(this, UserShowActivity::class.java)
         intent.putExtra("url", url)
         startActivity(intent)
@@ -71,7 +71,7 @@ class BottomTabActivity : AppCompatActivity() {
             } else {
                 val captureURL = result.contents
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-                navigateUserShow(captureURL)
+                navigateUserShowBy(captureURL)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
