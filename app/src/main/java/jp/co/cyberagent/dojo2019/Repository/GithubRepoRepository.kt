@@ -4,11 +4,7 @@ import android.util.Log
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import jp.co.cyberagent.dojo2019.Database.GithubService
-import jp.co.cyberagent.dojo2019.Entity.GithubRepository
-import retrofit2.Call
-import retrofit2.Callback
 import okhttp3.OkHttpClient
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 

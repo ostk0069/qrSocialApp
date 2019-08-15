@@ -91,9 +91,7 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun fetchReposBy(githubID: String?) {
         val githubId = githubID?: return
-        viewModel.fetchReposBy(githubId, {
-                repos -> mAdapter.update(repos.toMutableList())
-        })
+        viewModel.fetchReposBy(githubId) { repos -> mAdapter.update(repos.toMutableList()) }
     }
 
     private fun showImageBy(githubID: String?) {

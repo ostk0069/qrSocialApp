@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Repository.GithubRepoRepository
@@ -30,7 +29,6 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                 call: Call<List<GithubRepository>>?,
                 response: Response<List<GithubRepository>>?
             ) {
-                Log.d("test", response.toString())
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
@@ -41,7 +39,6 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
             }
             // FIXME: add error handling feature
             override fun onFailure(call: Call<List<GithubRepository>>?, t: Throwable?) {
-                Log.d("test", t?.message.toString())
             }
         })
     }
