@@ -1,11 +1,13 @@
 package jp.co.cyberagent.dojo2019.presentation.UserDetail
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import jp.co.cyberagent.dojo2019.R
+import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
 
 class UserDetailAdapter(private val context: Context): RecyclerView.Adapter<UserDetailViewHolder>() {
 
@@ -22,6 +24,12 @@ class UserDetailAdapter(private val context: Context): RecyclerView.Adapter<User
         holder.nameTextView.text = repo.name
         holder.languageTextView.text = repo.language
         holder.starTextView.text = repo.star.toString()
+
+        holder.layout.setOnClickListener {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("url", repo.url)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = repoList.size

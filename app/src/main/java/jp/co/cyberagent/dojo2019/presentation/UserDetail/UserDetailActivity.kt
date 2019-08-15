@@ -3,21 +3,23 @@ package jp.co.cyberagent.dojo2019.presentation.UserDetail
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.presentation.BottomTab.BottomTabActivity
 import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
-import jp.co.cyberagent.dojo2019.presentation.UserList.UserListAdapter
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -54,7 +56,6 @@ class UserDetailActivity : AppCompatActivity() {
 
         val uid: Int = intent.getIntExtra("uid", 0)
         fetchUserBy(uid)
-        fetchReposBy(user?.githubID)
 
         userListButton.setOnClickListener {
             navigateUserList()
@@ -84,12 +85,15 @@ class UserDetailActivity : AppCompatActivity() {
         githubText.text = user.githubID
         twitterText.text = user.twitterID
         showImageBy(user.githubID)
+        fetchReposBy(user.githubID)
 
     }
 
     private fun fetchReposBy(githubID: String?) {
         val githubId = githubID?: return
-        mAdapter.update(viewModel.fetchGithubReposBy(githubId))
+        viewModel.fetchReposBy(githubId, {
+                repos -> mAdapter.update(repos.toMutableList())
+        })
     }
 
     private fun showImageBy(githubID: String?) {

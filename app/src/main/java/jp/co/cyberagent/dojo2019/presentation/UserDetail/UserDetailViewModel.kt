@@ -1,12 +1,17 @@
 package jp.co.cyberagent.dojo2019.presentation.UserDetail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.Repository.GithubRepoRepository
 import jp.co.cyberagent.dojo2019.Repository.UserRepository
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UserDetailViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,11 +22,24 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
         return userRepository.fetchUserBy(uid)
     }
 
-    fun fetchGithubReposBy(githubID: String): MutableList<GithubRepository> {
-        var repoList: MutableList<GithubRepository> = mutableListOf()
-        githubRepoRepository.fetchRepos(githubID, {
-                repos -> repoList.addAll(repos)
+    fun fetchReposBy(githubID: String, callback: (List<GithubRepository>) -> Unit) {
+        val githubService = githubRepoRepository.createGithubService(githubID)
+        githubService.fetchRepos().enqueue(object : Callback<List<GithubRepository>> {
+
+            override fun onResponse(
+                call: Call<List<GithubRepository>>?,
+                response: Response<List<GithubRepository>>?
+            ) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            callback(it)
+                        }
+                    }
+                }
+            }
+            // FIXME: add error handling feature
+            override fun onFailure(call: Call<List<GithubRepository>>?, t: Throwable?) {}
         })
-        return repoList
     }
 }

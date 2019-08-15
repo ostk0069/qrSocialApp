@@ -5,7 +5,8 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
                                                    android:layout_marginRight="16dp" android:layout_marginLeft="16dp"
-                                                   android:layout_marginTop="8dp">
+                                                   android:layout_marginTop="8dp"
+                                                   android:id="@+id/user_detail_constraint_layout">
 
     <LinearLayout
             android:orientation="horizontal"
@@ -15,7 +16,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 tools:srcCompat="@drawable/ic_library_books_black_24dp"
-                android:id="@+id/repo_icon"/>
+                android:id="@+id/repo_icon" app:srcCompat="@drawable/ic_library_books_black_24dp"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -30,18 +31,18 @@
                     android:text="TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/repo_star" android:layout_marginTop="8dp" android:textSize="14sp"
+                    android:id="@+id/repo_language" android:layout_marginTop="8dp" android:textSize="14sp"
                     android:textColor="@color/colorSecodary"/>
         </LinearLayout>
         <ImageView
                 android:layout_width="20sp"
                 android:layout_height="20sp" tools:srcCompat="@drawable/ic_star_black_24dp"
                 android:id="@+id/image_star"
-                android:layout_marginRight="6dp"/>
+                android:layout_marginRight="6dp" app:srcCompat="@drawable/ic_star_black_24dp"/>
         <TextView
                 android:text="10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/repo_language"/>
+                android:id="@+id/repo_star"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
