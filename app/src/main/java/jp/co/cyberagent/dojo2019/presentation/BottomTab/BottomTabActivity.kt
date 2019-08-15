@@ -14,6 +14,8 @@ import jp.co.cyberagent.dojo2019.R
 
 class BottomTabActivity : AppCompatActivity() {
 
+    private var captureURL: String? = null
+
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -57,7 +59,12 @@ class BottomTabActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateUserShowBy(url: String) {
+    public override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigateUserShowBy(captureURL)
+    }
+
+    private fun navigateUserShowBy(url: String?) {
         val intent = Intent(this, UserShowActivity::class.java)
         intent.putExtra("url", url)
         startActivity(intent)
@@ -67,10 +74,10 @@ class BottomTabActivity : AppCompatActivity() {
         var result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "キャンセルされました", Toast.LENGTH_LONG).show()
             } else {
-                val captureURL = result.contents
-                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                captureURL = result.contents
+                Toast.makeText(this, "スキャンに成功しました", Toast.LENGTH_LONG).show()
                 navigateUserShowBy(captureURL)
             }
         } else {

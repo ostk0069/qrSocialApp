@@ -3,19 +3,16 @@ package jp.co.cyberagent.dojo2019.presentation.UserDetail
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import jp.co.cyberagent.dojo2019.Entity.User
 import jp.co.cyberagent.dojo2019.R
 import jp.co.cyberagent.dojo2019.presentation.BottomTab.BottomTabActivity
@@ -23,7 +20,6 @@ import jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity
 
 class UserDetailActivity : AppCompatActivity() {
 
-    private var user: User? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: UserDetailAdapter
     private lateinit var viewModel: UserDetailViewModel
@@ -34,6 +30,8 @@ class UserDetailActivity : AppCompatActivity() {
     private lateinit var githubUserImage: ImageView
     private lateinit var githubLinearLayout: LinearLayout
     private lateinit var twitterLinearLayout: LinearLayout
+    private var githubId: String = ""
+    private var twitterId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,15 +59,15 @@ class UserDetailActivity : AppCompatActivity() {
             navigateUserList()
         }
         githubUserImage.setOnClickListener {
-            val githubURL = "https://github.com/${user?.githubID}"
+            val githubURL = "https://github.com/${githubId}"
             navigateWebView(githubURL)
         }
         githubLinearLayout.setOnClickListener {
-            val githubURL = "https://github.com/${user?.githubID}"
+            val githubURL = "https://github.com/${githubId}"
             navigateWebView(githubURL)
         }
         twitterLinearLayout.setOnClickListener {
-            val twitterURL = "https://twitter.com/${user?.twitterID}"
+            val twitterURL = "https://twitter.com/${twitterId}"
             navigateWebView(twitterURL)
         }
     }
@@ -84,6 +82,8 @@ class UserDetailActivity : AppCompatActivity() {
         iamText.text = user.iam
         githubText.text = user.githubID
         twitterText.text = user.twitterID
+        githubId = user.githubID.orEmpty()
+        twitterId = user.twitterID.orEmpty()
         showImageBy(user.githubID)
         fetchReposBy(user.githubID)
 
