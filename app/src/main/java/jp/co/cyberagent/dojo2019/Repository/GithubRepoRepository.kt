@@ -1,9 +1,8 @@
 package jp.co.cyberagent.dojo2019.Repository
 
-import android.util.Log
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
-import jp.co.cyberagent.dojo2019.Database.GithubService
+import jp.co.cyberagent.dojo2019.Api.GithubService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

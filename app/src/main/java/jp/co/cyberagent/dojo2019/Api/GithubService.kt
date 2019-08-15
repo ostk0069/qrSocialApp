@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2019.Database
+package jp.co.cyberagent.dojo2019.Api
 
 import jp.co.cyberagent.dojo2019.Entity.GithubRepository
 import retrofit2.Call
