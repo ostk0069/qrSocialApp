@@ -26,13 +26,14 @@
                     android:text="hoge/hoge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/repo_name" android:textSize="18sp" android:textColor="@color/colorDark"/>
+                    android:id="@+id/repo_name" android:textSize="18sp" android:textColor="@color/colorDark"
+                    android:textStyle="bold"/>
             <TextView
                     android:text="TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/repo_language" android:layout_marginTop="8dp" android:textSize="14sp"
-                    android:textColor="@color/colorSecodary"/>
+                    android:textColor="@color/colorSecodary" android:textStyle="bold"/>
         </LinearLayout>
         <ImageView
                 android:layout_width="20sp"
@@ -43,6 +44,6 @@
                 android:text="10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/repo_star"/>
+                android:id="@+id/repo_star" android:textStyle="bold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

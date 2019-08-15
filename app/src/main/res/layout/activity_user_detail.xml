@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/user_iam"
                     android:text="Name"
-                    android:textSize="18sp"
+                    android:textSize="36sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8sp"
                     android:layout_marginRight="16sp"
