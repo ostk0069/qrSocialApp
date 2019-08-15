@@ -84,7 +84,7 @@ class UserShowActivity : AppCompatActivity() {
 
     private fun showGithubImage() {
         val githubID: String = user?.githubID.toString()
-        if (githubID.length < 4) {
+        if (githubID.isEmpty()) {
             val drawable: Drawable? = getDrawable(R.drawable.failed)
             drawable?: return
             githubUserImage.setImageDrawable(drawable)

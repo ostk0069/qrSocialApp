@@ -96,7 +96,7 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun showImageBy(githubID: String?) {
         val githubID = githubID?: return
-        if (githubID.length < 4) {
+        if (githubID.isEmpty()) {
             val drawable: Drawable? = getDrawable(R.drawable.failed)
             drawable?: return
             githubUserImage.setImageDrawable(drawable)
