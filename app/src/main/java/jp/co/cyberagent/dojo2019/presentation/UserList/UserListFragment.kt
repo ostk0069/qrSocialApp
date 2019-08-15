@@ -50,7 +50,7 @@ class UserListFragment : Fragment() {
     }
 
     private fun insertUserData() {
-        viewModel.getLiveUsers().observe(this, Observer<List<User>> { users ->
+        viewModel.getUsers().observe(this, Observer<List<User>> { users ->
             mAdapter.updateUserList(users.toMutableList())
         })
     }

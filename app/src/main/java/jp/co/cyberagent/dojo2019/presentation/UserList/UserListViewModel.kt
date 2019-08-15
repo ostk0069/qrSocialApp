@@ -18,7 +18,7 @@ class UserListViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun getLiveUsers(): LiveData<List<User>> {
-        return repository.getLiveDataUsers()
+    fun getUsers(): LiveData<List<User>> {
+        return repository.getUsers()
     }
 }

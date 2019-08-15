@@ -14,15 +14,15 @@ class UserRepository(context: Context) {
     }
 
     suspend fun deleteUserBy(uid: Int) {
-        database.userDao().deleteByUid(uid)
+        database.userDao().deleteBy(uid)
     }
 
     suspend fun findUserBy(githubID: String): User? {
-        return database.userDao().findUserByGithubId(githubID)
+        return database.userDao().findUserBy(githubID)
     }
 
-    fun getLiveDataUsers(): LiveData<List<User>> {
-        return database.userDao().getLiveUsers()
+    fun getUsers(): LiveData<List<User>> {
+        return database.userDao().getUsers()
     }
 
     fun fetchUserBy(uid: Int): LiveData<User> {

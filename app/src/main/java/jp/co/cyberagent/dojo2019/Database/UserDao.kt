@@ -10,10 +10,7 @@ import jp.co.cyberagent.dojo2019.Entity.User
 interface UserDao {
 
     @Query("SELECT * FROM user")
-    suspend fun getAll(): List<User>
-
-    @Query("SELECT * FROM user")
-    fun getLiveUsers(): LiveData<List<User>>
+    fun getUsers(): LiveData<List<User>>
 
     @Query("SELECT * FROM user WHERE uid = :uid")
     fun findUserBy(uid: Int): LiveData<User>
@@ -22,8 +19,8 @@ interface UserDao {
     suspend fun insert(user: User)
 
     @Query("DELETE FROM user WHERE uid = :uid")
-    suspend fun deleteByUid(uid: Int)
+    suspend fun deleteBy(uid: Int)
 
     @Query("SELECT * FROM user WHERE github_id = :githubID")
-    suspend fun findUserByGithubId(githubID: String): User?
+    suspend fun findUserBy(githubID: String): User?
 }
