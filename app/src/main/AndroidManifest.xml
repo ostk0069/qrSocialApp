@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.UserShow.UserShowActivity">
+        <activity
+                android:name=".presentation.UserShow.UserShowActivity"
+                android:label="Capture Result">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -31,7 +33,9 @@
         </activity>
         <activity android:name="jp.co.cyberagent.dojo2019.presentation.Common.WebViewActivity">
         </activity>
-        <activity android:name="jp.co.cyberagent.dojo2019.presentation.UserDetail.UserDetailActivity">
+        <activity
+                android:name="jp.co.cyberagent.dojo2019.presentation.UserDetail.UserDetailActivity"
+                android:label="User Detail">
         </activity>
     </application>
 
