@@ -16,6 +16,7 @@ class GithubRepoRepository {
 
     fun createGithubService(githubID: String): GithubService {
         val url = "https://api.github.com/users/" + githubID + "/" // https://api.github.com/users/hmarf/repos
+        Log.d("test", url)
         val okHttpClient = OkHttpClient.Builder().build()
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val retrofit = Retrofit.Builder()

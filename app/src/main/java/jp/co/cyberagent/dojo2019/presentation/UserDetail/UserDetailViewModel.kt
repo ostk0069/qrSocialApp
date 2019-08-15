@@ -30,6 +30,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                 call: Call<List<GithubRepository>>?,
                 response: Response<List<GithubRepository>>?
             ) {
+                Log.d("test", response.toString())
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
@@ -39,7 +40,9 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                 }
             }
             // FIXME: add error handling feature
-            override fun onFailure(call: Call<List<GithubRepository>>?, t: Throwable?) {}
+            override fun onFailure(call: Call<List<GithubRepository>>?, t: Throwable?) {
+                Log.d("test", t?.message.toString())
+            }
         })
     }
 }
